@@ -33,6 +33,27 @@
             font-size: 16px; font-weight: bold; color: var(--royal); margin-top: 5px; 
             animation: blinkGold 1.2s infinite; text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
+        
+        /* استایل جدید برای چالش */
+        .challenge-link {
+            display: block;
+            margin: 15px 0;
+            padding: 10px;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px dashed var(--gold);
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            animation: blinkChallenge 1.5s infinite;
+            transition: 0.3s;
+        }
+        @keyframes blinkChallenge {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 5px var(--gold); }
+            50% { opacity: 0.7; transform: scale(0.98); box-shadow: 0 0 15px var(--fire); }
+        }
+
         @keyframes blinkGold {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.3; transform: scale(0.97); }
@@ -88,6 +109,10 @@
         <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg" class="main-logo">
         <div class="brand-container"><span class="fire-anim">🔥</span><div class="brand-name">الو ذغال</div><span class="fire-anim">🔥</span></div>
         <div class="sub-brand">سفارش سریع ذغال</div>
+        
+        <a href="https://aloozoghal-hash.github.io/-Mir-mir-/" class="challenge-link">
+            💥چالش رو ببر  ۳ کیسه ذغال جایزه بگیر💥
+        </a>
     </div>
 
     <div class="media-container">
@@ -157,7 +182,7 @@
             <div class="invoice-row" id="row-inv-sabzi"><span>سبزی:</span> <b id="inv-qty-sabzi"></b> بسته</div>
             <div class="invoice-row"><span>زمان:</span> <b id="inv-time"></b></div>
             <div class="invoice-row"><span>مبلغ کل:</span> <span><b id="inv-price"></b> تومان</span></div>
-            <p style="font-size: 13px; color: #ffd700; margin-top: 10px; line-height: 1.5;"</p>
+            <p style="font-size: 13px; color: #ffd700; margin-top: 10px; line-height: 1.5;"></p>
             
             <div class="btn-action">
                 <button class="btn btn-edit" onclick="editOrder()">اصلاح</button>
