@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الو ذغال | ثبت سفارش سریع</title>
     
-    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/3cef8e52cef4f50b4b27eacfd3a4575a34a79fa7/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg">
     
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
@@ -39,12 +39,13 @@
             text-align: center;
         }
 
+        /* استایل لوگوی جدید شما */
         .main-logo {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             border: 3px solid var(--gold);
-            box-shadow: 0 0 30px rgba(226, 176, 74, 0.4);
+            box-shadow: 0 0 30px rgba(226, 176, 74, 0.5);
             object-fit: cover;
             margin-bottom: 5px;
             background: #000;
@@ -122,7 +123,7 @@
 
         .btn { width: 100%; padding: 20px; border: none; border-radius: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 16px; transition: 0.3s; }
         .btn-gold { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; box-shadow: 0 10px 20px rgba(226, 176, 74, 0.2); }
-        .btn-wa { background: #25D366; color: #fff; display: none; font-size: 17px; }
+        .btn-wa { background: #25D366; color: #fff; display: none; font-size: 18px; }
         .btn-gps { background: #1a1a1a; color: #fff; border: 1px solid #333; font-size: 15px; margin-bottom: 5px; }
 
         #toast { position: fixed; bottom: 30px; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 50px; font-weight: bold; display: none; z-index: 1000; }
@@ -131,7 +132,7 @@
 <body>
 
     <header class="brand-header">
-        <img src="logo.jpg" alt="الو ذغال" class="main-logo" onerror="this.style.display='none'">
+        <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/3cef8e52cef4f50b4b27eacfd3a4575a34a79fa7/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg" alt="الو ذغال" class="main-logo">
         <h1>الو ذغال</h1>
     </header>
 
@@ -161,11 +162,11 @@
         <div id="invoice" class="invoice-card">
             <div class="inv-head"><strong>🧾 خلاصه سفارش من</strong></div>
             <div class="inv-row"><span>نام من:</span> <span id="f-name"></span></div>
-            <div class="inv-row"><span>محصول:</span> <span>ذغال کبابی</span></div>
+            <div class="inv-row"><span>محصول:</span> <span>ذغال کبابی درجه یک</span></div>
             <div class="inv-row"><span>تعداد سفارش:</span> <span id="f-qty"></span></div>
             <div class="inv-row"><span>نشانی و توضیحات:</span> <span id="f-addr" style="text-align: left; max-width: 60%;"></span></div>
             <div class="inv-row"><span>وضعیت لوکیشن:</span> <span id="f-gps">❌ ثبت نشده</span></div>
-            <div class="inv-total"><span>مبلغ نهایی:</span> <span><span id="f-total"></span> تومان</span></div>
+            <div class="inv-total"><span>مبلغ قابل پرداخت:</span> <span><span id="f-total"></span> تومان</span></div>
         </div>
 
         <button id="wa-btn" class="btn btn-wa" onclick="sendToWA()">📱 ارسال سفارش به الو ذغال</button>
@@ -184,7 +185,12 @@
             setTimeout(() => t.style.display = 'none', 3000);
         }
 
-        function updateQty(v) { if (count + v >= 1) { count += v; document.getElementById('qty-val').innerText = count; } }
+        function updateQty(v) {
+            if (count + v >= 1) {
+                count += v;
+                document.getElementById('qty-val').innerText = count;
+            }
+        }
 
         function getGPS() {
             msg("📍 در حال یافتن موقعیت شما...");
@@ -215,7 +221,7 @@
             const total = (count * PRICE).toLocaleString();
             let text = `سلام الو ذغال، خسته نباشید 🖐️\n\n👤 *نام من:* ${name}\n📦 *تعداد:* ${count} کیسه\n💰 *مبلغ:* ${total} تومان\n`;
             if(addr) text += `🏠 *آدرس:* ${addr}\n`;
-            if(gpsLink) text += `📍 *لوکیشن:* ${gpsLink}\n`;
+            if(gpsLink) text += `📍 *لوکیشن من:* ${gpsLink}\n`;
             text += `\nلطفاً هماهنگ کنید سریع به دستم برسه. ممنون!`;
             window.open(`https://wa.me/989370214819?text=${encodeURIComponent(text)}`);
         }
