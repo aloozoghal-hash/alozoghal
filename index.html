@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الو ذغال | ثبت سفارش سریع</title>
-    <link rel="icon" type="image/png" href="https://github.com/user-attachments/assets/69d30009-8bc8-4f24-91f8-9580556b633b">
+    
+    <link rel="icon" type="image/jpeg" href="https://github.com/aloozoghal-hash/alozoghal/assets/251715844/7c7f8db5-4fdc-4e6e-94d2-326abe58b91f">
     
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
@@ -38,28 +39,29 @@
             text-align: center;
         }
 
-        /* استایل لوگوی آپلود شده شما */
+        /* لوگوی زیبای الو ذغال */
         .main-logo {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 2px solid var(--gold);
-            box-shadow: 0 0 20px rgba(226, 176, 74, 0.3);
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 25px rgba(226, 176, 74, 0.4);
             object-fit: cover;
             margin-bottom: 10px;
         }
 
         .brand-header h1 { 
-            font-size: 35px; 
+            font-size: 38px; 
             color: var(--gold); 
             text-shadow: 0 0 20px rgba(226, 176, 74, 0.4);
+            letter-spacing: -1px;
         }
 
-        .flame-container { display: flex; gap: 15px; align-items: center; }
+        .flame-container { display: flex; gap: 12px; align-items: center; }
 
         .flame {
-            width: 15px;
-            height: 25px;
+            width: 18px;
+            height: 28px;
             background: linear-gradient(transparent, var(--fire), #ffae00, #fff);
             border-radius: 50% 50% 20% 20%;
             filter: blur(1px);
@@ -74,78 +76,80 @@
         .order-card {
             width: 100%;
             max-width: 450px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            border-radius: 35px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 25px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.7);
         }
 
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
+        .form-group { margin-bottom: 22px; }
+        label { display: block; margin-bottom: 10px; color: #bbb; font-size: 14px; font-weight: 300; }
 
         input, textarea {
             width: 100%;
-            padding: 16px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid #333;
-            border-radius: 15px;
+            padding: 18px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #222;
+            border-radius: 18px;
             color: #fff;
             font-size: 16px;
             transition: 0.3s;
         }
-        input:focus, textarea:focus { border-color: var(--gold); outline: none; background: rgba(0,0,0,0.6); }
+        input:focus, textarea:focus { border-color: var(--gold); outline: none; background: rgba(0,0,0,0.7); }
 
         .qty-box {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: #000;
-            border-radius: 15px;
-            padding: 5px;
+            border-radius: 18px;
+            padding: 6px;
             border: 1px solid #333;
         }
         .qty-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
             border: none;
-            background: #1a1a1a;
+            background: #151515;
             color: var(--gold);
-            font-size: 25px;
+            font-size: 28px;
             cursor: pointer;
+            transition: 0.2s;
         }
+        .qty-btn:active { transform: scale(0.9); background: var(--gold); color: #000; }
 
         .invoice-card {
             display: none;
-            margin-top: 20px;
+            margin-top: 25px;
             background: #fff;
             color: #000;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: slideUp 0.4s ease-out;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .inv-head { text-align: center; border-bottom: 2px dashed #ccc; padding-bottom: 10px; margin-bottom: 15px; }
-        .inv-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
-        .inv-total { border-top: 2px solid #000; padding-top: 10px; font-weight: 900; font-size: 18px; color: #d32f2f; margin-top: 10px; }
+        .inv-head { text-align: center; border-bottom: 2px dashed #ddd; padding-bottom: 15px; margin-bottom: 15px; }
+        .inv-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; }
+        .inv-total { border-top: 2px solid #000; padding-top: 15px; font-weight: 900; font-size: 20px; color: #d32f2f; }
 
-        .btn { width: 100%; padding: 18px; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; margin-top: 12px; font-size: 16px; transition: 0.3s; }
-        .btn-gold { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; }
-        .btn-wa { background: #25D366; color: #fff; display: none; font-size: 18px; }
+        .btn { width: 100%; padding: 20px; border: none; border-radius: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 16px; transition: 0.3s; }
+        .btn-gold { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; box-shadow: 0 10px 20px rgba(226, 176, 74, 0.2); }
+        .btn-wa { background: #25D366; color: #fff; display: none; font-size: 17px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
         .btn-gps { background: #1a1a1a; color: #fff; border: 1px solid #333; font-size: 15px; }
 
-        #toast { position: fixed; bottom: 20px; background: var(--gold); color: #000; padding: 10px 25px; border-radius: 50px; font-weight: bold; display: none; z-index: 1000; font-size: 14px; }
+        #toast { position: fixed; bottom: 30px; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 50px; font-weight: bold; display: none; z-index: 1000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
 
     <header class="brand-header">
-        <img src="https://github.com/user-attachments/assets/69d30009-8bc8-4f24-91f8-9580556b633b" alt="الو ذغال" class="main-logo">
+        <img src="https://github.com/aloozoghal-hash/alozoghal/assets/251715844/7c7f8db5-4fdc-4e6e-94d2-326abe58b91f" alt="لوگو الو ذغال" class="main-logo">
         <div class="flame-container">
             <div class="flame"></div>
             <h1>الو ذغال</h1>
@@ -163,7 +167,7 @@
             <label>🔢 تعداد کیسه درخواستی (۶۵,۰۰۰ تومان):</label>
             <div class="qty-box">
                 <button class="qty-btn" onclick="updateQty(1)">+</button>
-                <span id="qty-val" style="font-size: 22px; font-weight: 900;">۱</span>
+                <span id="qty-val" style="font-size: 24px; font-weight: 900;">۱</span>
                 <button class="qty-btn" onclick="updateQty(-1)">-</button>
             </div>
         </div>
@@ -212,6 +216,7 @@
             if (count + v >= 1) {
                 count += v;
                 document.getElementById('qty-val').innerText = count;
+                msg(v > 0 ? "تعداد افزایش یافت ➕" : "تعداد کاهش یافت ➖");
             }
         }
 
@@ -219,23 +224,30 @@
             msg("📍 در حال یافتن موقعیت شما...");
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(pos => {
-                    gpsLink = `http://maps.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
-                    msg("✅ لوکیشن شما با موفقیت ثبت شد");
-                }, () => msg("❌ خطا! لطفاً دسترسی به GPS را تایید کنید"));
+                    gpsLink = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+                    msg("✅ لوکیشن با موفقیت ثبت شد");
+                }, () => msg("❌ خطا! لطفاً GPS گوشی را روشن کنید"));
             }
         }
 
         function showInvoice() {
             const name = document.getElementById('custName').value.trim();
             const addr = document.getElementById('address').value.trim();
-            if (!name) { msg("⚠️ نام خود را وارد کنید"); return; }
+
+            if (!name) { 
+                msg("⚠️ لطفاً نام خود را وارد کنید"); 
+                return; 
+            }
+
             document.getElementById('f-name').innerText = name;
             document.getElementById('f-qty').innerText = count + " کیسه";
             document.getElementById('f-addr').innerText = addr || "ذکر نشده";
             document.getElementById('f-total').innerText = (count * PRICE).toLocaleString();
             document.getElementById('f-gps').innerText = gpsLink ? "✅ ثبت شده" : "❌ ثبت نشده";
+
             document.getElementById('invoice').style.display = 'block';
             document.getElementById('wa-btn').style.display = 'block';
+            
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
@@ -243,10 +255,17 @@
             const name = document.getElementById('custName').value;
             const addr = document.getElementById('address').value;
             const total = (count * PRICE).toLocaleString();
-            let text = `سلام الو ذغال، خسته نباشید 🖐️\n\n👤 *نام من:* ${name}\n📦 *تعداد:* ${count} کیسه\n💰 *مبلغ:* ${total} تومان\n`;
-            if(addr) text += `🏠 *آدرس:* ${addr}\n`;
+            
+            let text = `سلام الو ذغال، خسته نباشید 🖐️\n\n`;
+            text += `👤 *نام من:* ${name}\n`;
+            text += `📦 *تعداد درخواستی:* ${count} کیسه ذغال کبابی\n`;
+            text += `💰 *مبلغ فاکتور:* ${total} تومان\n`;
+            
+            if(addr) text += `🏠 *آدرس و توضیحات:* ${addr}\n`;
             if(gpsLink) text += `📍 *لوکیشن من:* ${gpsLink}\n`;
+            
             text += `\nلطفاً هماهنگ کنید سریع به دستم برسه. ممنون!`;
+
             window.open(`https://wa.me/989370214819?text=${encodeURIComponent(text)}`);
         }
     </script>
