@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الو ذغال | ثبت سفارش سریع</title>
+    <link rel="icon" type="image/png" href="https://github.com/user-attachments/assets/69d30009-8bc8-4f24-91f8-9580556b633b">
+    
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
 
@@ -28,22 +30,36 @@
 
         .brand-header {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            margin: 20px 0 30px 0;
+            gap: 10px;
+            margin: 10px 0 30px 0;
             text-align: center;
         }
 
+        /* استایل لوگوی آپلود شده شما */
+        .main-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 20px rgba(226, 176, 74, 0.3);
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
         .brand-header h1 { 
-            font-size: 40px; 
+            font-size: 35px; 
             color: var(--gold); 
             text-shadow: 0 0 20px rgba(226, 176, 74, 0.4);
         }
 
+        .flame-container { display: flex; gap: 15px; align-items: center; }
+
         .flame {
-            width: 25px;
-            height: 40px;
+            width: 15px;
+            height: 25px;
             background: linear-gradient(transparent, var(--fire), #ffae00, #fff);
             border-radius: 50% 50% 20% 20%;
             filter: blur(1px);
@@ -129,9 +145,12 @@
 <body>
 
     <header class="brand-header">
-        <div class="flame"></div>
-        <h1>الو ذغال</h1>
-        <div class="flame"></div>
+        <img src="https://github.com/user-attachments/assets/69d30009-8bc8-4f24-91f8-9580556b633b" alt="الو ذغال" class="main-logo">
+        <div class="flame-container">
+            <div class="flame"></div>
+            <h1>الو ذغال</h1>
+            <div class="flame"></div>
+        </div>
     </header>
 
     <div class="order-card">
@@ -155,7 +174,6 @@
         </div>
 
         <button class="btn btn-gps" onclick="getGPS()">📍 ثبت موقعیت مکانی من (GPS)</button>
-        
         <button class="btn btn-gold" onclick="showInvoice()">✅ ثبت سفارش</button>
 
         <div id="invoice" class="invoice-card">
@@ -201,33 +219,23 @@
             msg("📍 در حال یافتن موقعیت شما...");
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(pos => {
-                    gpsLink = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+                    gpsLink = `http://maps.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
                     msg("✅ لوکیشن شما با موفقیت ثبت شد");
                 }, () => msg("❌ خطا! لطفاً دسترسی به GPS را تایید کنید"));
-            } else {
-                msg("❌ مرورگر شما از GPS پشتیبانی نمی‌کند");
             }
         }
 
         function showInvoice() {
             const name = document.getElementById('custName').value.trim();
             const addr = document.getElementById('address').value.trim();
-
-            if (!name) { 
-                msg("⚠️ لطفاً نام خود را وارد کنید"); 
-                document.getElementById('custName').focus();
-                return; 
-            }
-
+            if (!name) { msg("⚠️ نام خود را وارد کنید"); return; }
             document.getElementById('f-name').innerText = name;
             document.getElementById('f-qty').innerText = count + " کیسه";
             document.getElementById('f-addr').innerText = addr || "ذکر نشده";
             document.getElementById('f-total').innerText = (count * PRICE).toLocaleString();
             document.getElementById('f-gps').innerText = gpsLink ? "✅ ثبت شده" : "❌ ثبت نشده";
-
             document.getElementById('invoice').style.display = 'block';
             document.getElementById('wa-btn').style.display = 'block';
-            
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
@@ -235,17 +243,10 @@
             const name = document.getElementById('custName').value;
             const addr = document.getElementById('address').value;
             const total = (count * PRICE).toLocaleString();
-            
-            let text = `سلام الو ذغال، خسته نباشید 🖐️\n\n`;
-            text += `👤 *نام من:* ${name}\n`;
-            text += `📦 *تعداد درخواستی:* ${count} کیسه ذغال کبابی\n`;
-            text += `💰 *مبلغ فاکتور:* ${total} تومان\n`;
-            
-            if(addr) text += `🏠 *آدرس و توضیحات:* ${addr}\n`;
+            let text = `سلام الو ذغال، خسته نباشید 🖐️\n\n👤 *نام من:* ${name}\n📦 *تعداد:* ${count} کیسه\n💰 *مبلغ:* ${total} تومان\n`;
+            if(addr) text += `🏠 *آدرس:* ${addr}\n`;
             if(gpsLink) text += `📍 *لوکیشن من:* ${gpsLink}\n`;
-            
-            text += `\nلطفاً هماهنگ کنید ذغال سریع به دستم برسه. ممنون!`;
-
+            text += `\nلطفاً هماهنگ کنید سریع به دستم برسه. ممنون!`;
             window.open(`https://wa.me/989370214819?text=${encodeURIComponent(text)}`);
         }
     </script>
