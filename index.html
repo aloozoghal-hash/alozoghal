@@ -39,29 +39,30 @@
             text-align: center;
         }
 
-        /* لوگوی زیبای الو ذغال */
+        /* استایل لوگوی آپلود شده شما */
         .main-logo {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             border: 3px solid var(--gold);
-            box-shadow: 0 0 25px rgba(226, 176, 74, 0.4);
+            box-shadow: 0 0 25px rgba(226, 176, 74, 0.5);
             object-fit: cover;
             margin-bottom: 10px;
+            background: #000;
         }
 
         .brand-header h1 { 
-            font-size: 38px; 
+            font-size: 40px; 
             color: var(--gold); 
             text-shadow: 0 0 20px rgba(226, 176, 74, 0.4);
-            letter-spacing: -1px;
+            margin-top: 5px;
         }
 
-        .flame-container { display: flex; gap: 12px; align-items: center; }
+        .flame-container { display: flex; gap: 15px; align-items: center; }
 
         .flame {
             width: 18px;
-            height: 28px;
+            height: 30px;
             background: linear-gradient(transparent, var(--fire), #ffae00, #fff);
             border-radius: 50% 50% 20% 20%;
             filter: blur(1px);
@@ -91,7 +92,7 @@
             width: 100%;
             padding: 18px;
             background: rgba(0,0,0,0.5);
-            border: 1px solid #222;
+            border: 1px solid #333;
             border-radius: 18px;
             color: #fff;
             font-size: 16px;
@@ -129,7 +130,7 @@
             border-radius: 25px;
             padding: 25px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideUp 0.5s ease;
         }
 
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -143,13 +144,13 @@
         .btn-wa { background: #25D366; color: #fff; display: none; font-size: 17px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
         .btn-gps { background: #1a1a1a; color: #fff; border: 1px solid #333; font-size: 15px; }
 
-        #toast { position: fixed; bottom: 30px; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 50px; font-weight: bold; display: none; z-index: 1000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        #toast { position: fixed; bottom: 30px; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 50px; font-weight: bold; display: none; z-index: 1000; }
     </style>
 </head>
 <body>
 
     <header class="brand-header">
-        <img src="https://github.com/aloozoghal-hash/alozoghal/assets/251715844/7c7f8db5-4fdc-4e6e-94d2-326abe58b91f" alt="لوگو الو ذغال" class="main-logo">
+        <img src="https://github.com/aloozoghal-hash/alozoghal/assets/251715844/7c7f8db5-4fdc-4e6e-94d2-326abe58b91f" alt="الو ذغال" class="main-logo">
         <div class="flame-container">
             <div class="flame"></div>
             <h1>الو ذغال</h1>
@@ -226,7 +227,7 @@
                 navigator.geolocation.getCurrentPosition(pos => {
                     gpsLink = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
                     msg("✅ لوکیشن با موفقیت ثبت شد");
-                }, () => msg("❌ خطا! لطفاً GPS گوشی را روشن کنید"));
+                }, () => msg("❌ خطا! لطفاً GPS را روشن کنید"));
             }
         }
 
@@ -235,7 +236,7 @@
             const addr = document.getElementById('address').value.trim();
 
             if (!name) { 
-                msg("⚠️ لطفاً نام خود را وارد کنید"); 
+                msg("⚠️ نام خود را وارد کنید"); 
                 return; 
             }
 
