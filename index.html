@@ -6,12 +6,9 @@
     <title>الو ذغال | ثبت سفارش سریع</title>
     
     <link rel="icon" href="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/3cef8e52cef4f50b4b27eacfd3a4575a34a79fa7/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg" type="image/jpeg">
-    
     <meta property="og:title" content="الو ذغال">
-    <meta property="og:description" content="ثبت سفارش سریع ذغال کبابی با ارسال فوری">
+    <meta property="og:description" content="ثبت سفارش سریع ذغال کبابی درجه یک">
     <meta property="og:image" content="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/3cef8e52cef4f50b4b27eacfd3a4575a34a79fa7/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg">
-    <meta property="og:url" content="https://aloozoghal-hash.github.io/alozoghal/">
-    <meta property="og:type" content="website">
 
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
@@ -24,14 +21,10 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* ۳. تصویر لوگوی اصلی در هدر */
-        .main-logo { 
-            width: 140px; height: 140px; border-radius: 50%; 
-            border: 3px solid var(--gold); box-shadow: 0 0 30px rgba(226, 176, 74, 0.5); 
-            object-fit: cover; margin-bottom: 20px; 
-        }
+        .main-logo { width: 130px; height: 130px; border-radius: 50%; border: 3px solid var(--gold); box-shadow: 0 0 30px rgba(226, 176, 74, 0.5); object-fit: cover; margin-bottom: 20px; }
         
         .order-card { width: 100%; max-width: 450px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(25px); border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; }
+
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; color: #bbb; font-size: 14px; }
         input, textarea { width: 100%; padding: 16px; background: rgba(0,0,0,0.5); border: 1px solid #333; border-radius: 15px; color: #fff; font-size: 16px; outline: none; }
@@ -48,7 +41,15 @@
 
         .btn { width: 100%; padding: 18px; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
         .btn-gold { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; }
-        .btn-wa { background: #25D366; color: #fff; display: none; }
+        
+        /* انیمیشن تپش برای دکمه واتساپ */
+        .btn-wa { background: #25D366; color: #fff; display: none; animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
         .btn-edit { background: #f0f0f0; color: #333; display: none; font-size: 14px; }
         .btn-gps { background: #1a1a1a; color: #fff; border: 1px solid #333; font-size: 14px; margin-bottom: 5px; }
 
@@ -76,21 +77,21 @@
 
         <div class="form-group">
             <label>🏠 آدرس و توضیحات:</label>
-            <textarea id="address" placeholder="آدرس دقیق برای ارسال سریع..."></textarea>
+            <textarea id="address" placeholder="آدرس دقیق برای ارسال..."></textarea>
         </div>
 
         <button class="btn btn-gps" id="gpsBtn" onclick="getGPS()">📍 ثبت موقعیت مکانی من (GPS)</button>
-        <button class="btn btn-gold" id="submitBtn" onclick="showInvoice()">✅ مشاهده فاکتور و تایید</button>
+        <button class="btn btn-gold" id="submitBtn" onclick="showInvoice()">✅ مشاهده فاکتور نهایی</button>
 
         <div id="invoice" class="invoice-card">
-            <div style="text-align:center; font-weight:bold; margin-bottom:10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">🧾 پیش‌فاکتور من</div>
-            <div class="inv-row"><span>نام مشتری:</span> <span id="f-name"></span></div>
-            <div class="inv-row"><span>تعداد سفارش:</span> <span id="f-qty"></span></div>
-            <div class="inv-row"><span>وضعیت لوکیشن:</span> <span id="f-gps">❌ ثبت نشده</span></div>
-            <div class="inv-total"><span>مبلغ قابل پرداخت:</span> <span><span id="f-total"></span> تومان</span></div>
+            <div style="text-align:center; font-weight:bold; margin-bottom:10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">🧾 پیش‌فاکتور سفارش من</div>
+            <div class="inv-row"><span>👤 نام من:</span> <span id="f-name"></span></div>
+            <div class="inv-row"><span>📦 تعداد درخواستی:</span> <span id="f-qty"></span></div>
+            <div class="inv-row"><span>📍 لوکیشن من:</span> <span id="f-gps">❌ ثبت نشده</span></div>
+            <div class="inv-total"><span>💰 مبلغ فاکتور:</span> <span><span id="f-total"></span> تومان</span></div>
         </div>
 
-        <button id="wa-btn" class="btn btn-wa" onclick="sendToWA()">📱 ارسال نهایی در واتساپ</button>
+        <button id="wa-btn" class="btn btn-wa" onclick="sendToWA()">📱 تایید و ارسال در واتساپ</button>
         <button id="edit-btn" class="btn btn-edit" onclick="resetOrder()">🔄 ویرایش یا سفارش مجدد</button>
     </div>
 
@@ -111,8 +112,7 @@
                     t.innerText = "✅ لوکیشن با موفقیت ثبت شد";
                     t.style.display = "block";
                     setTimeout(() => t.style.display = "none", 3000);
-                    document.getElementById('gpsBtn').style.borderColor = "#25D366";
-                }, () => alert("لطفاً دسترسی GPS را در تنظیمات مرورگر باز کنید."));
+                }, () => alert("لطفاً GPS را روشن کنید."));
             }
         }
 
@@ -143,9 +143,16 @@
         function sendToWA() {
             const name = document.getElementById('custName').value;
             const addr = document.getElementById('address').value;
-            let text = `سلام الو ذغال 👋\n\n👤 *نام مشتری:* ${name}\n📦 *تعداد سفارش:* ${count} کیسه\n💰 *مبلغ نهایی:* ${(count*PRICE).toLocaleString()} تومان\n🏠 *آدرس:* ${addr}`;
-            if(gpsLink) text += `\n📍 *لوکیشن:* ${gpsLink}`;
-            text += `\n\nلطفاً تایید کنید.`;
+            const total = (count * PRICE).toLocaleString();
+            
+            let text = `سلام الو ذغال، خسته نباشید 🖐️\n\n`;
+            text += `👤 نام من: ${name}\n`;
+            text += `📦 تعداد درخواستی: ${count} کیسه\n`;
+            text += `💰 مبلغ فاکتور: ${total} تومان\n`;
+            if(addr) text += `🏠 آدرس: ${addr}\n`;
+            text += `📍 لوکیشن من: ${gpsLink || 'ارسال نشد'}\n\n`;
+            text += `💥لطفاً هماهنگ کنید ذغال سریع به دستم برسه. ممنون!💥`;
+
             window.open(`https://wa.me/989370214819?text=${encodeURIComponent(text)}`);
         }
     </script>
