@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الو ذغال | ثبت سفارش سریع</title>
     
-    <link rel="icon" type="image/jpeg" href="https://github.com/aloozoghal-hash/alozoghal/assets/251715844/7c7f8db5-4fdc-4e6e-94d2-326abe58b91f">
+    <link rel="icon" type="image/jpeg" href="https://github.com/aloozoghal-hash/alozoghal/assets/251715844/1ca07bf2-a71c-494b-980f-a89245ee7a27">
     
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
@@ -34,6 +34,226 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 10px;
+            margin: 10px 0 30px 0;
+            text-align: center;
+        }
+
+        /* لوگوی دائمی و باکیفیت شما */
+        .main-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 30px rgba(226, 176, 74, 0.4);
+            object-fit: cover;
+            margin-bottom: 5px;
+            background: #000;
+        }
+
+        .brand-header h1 { 
+            font-size: 38px; 
+            color: var(--gold); 
+            text-shadow: 0 0 20px rgba(226, 176, 74, 0.4);
+            margin: 0;
+        }
+
+        .flame-container { display: flex; gap: 12px; align-items: center; }
+
+        .flame {
+            width: 15px;
+            height: 25px;
+            background: linear-gradient(transparent, var(--fire), #ffae00, #fff);
+            border-radius: 50% 50% 20% 20%;
+            filter: blur(1px);
+            animation: burn 0.7s infinite alternate ease-in-out;
+        }
+
+        @keyframes burn {
+            0% { transform: scaleY(1) rotate(-2deg); opacity: 0.8; }
+            100% { transform: scaleY(1.3) rotate(2deg); opacity: 1; }
+        }
+
+        .order-card {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+        }
+
+        .form-group { margin-bottom: 22px; }
+        label { display: block; margin-bottom: 10px; color: #bbb; font-size: 14px; }
+
+        input, textarea {
+            width: 100%;
+            padding: 18px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            border-radius: 18px;
+            color: #fff;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        input:focus, textarea:focus { border-color: var(--gold); outline: none; background: rgba(0,0,0,0.7); }
+
+        .qty-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #000;
+            border-radius: 18px;
+            padding: 6px;
+            border: 1px solid #333;
+        }
+        .qty-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            border: none;
+            background: #151515;
+            color: var(--gold);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .invoice-card {
+            display: none;
+            margin-top: 25px;
+            background: #fff;
+            color: #000;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .inv-head { text-align: center; border-bottom: 2px dashed #ddd; padding-bottom: 15px; margin-bottom: 15px; }
+        .inv-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; }
+        .inv-total { border-top: 2px solid #000; padding-top: 15px; font-weight: 900; font-size: 20px; color: #d32f2f; }
+
+        .btn { width: 100%; padding: 20px; border: none; border-radius: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 16px; transition: 0.3s; }
+        .btn-gold { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; box-shadow: 0 10px 20px rgba(226, 176, 74, 0.2); }
+        .btn-wa { background: #25D366; color: #fff; display: none; font-size: 17px; }
+        .btn-gps { background: #1a1a1a; color: #fff; border: 1px solid #333; font-size: 15px; margin-bottom: 5px; }
+
+        #toast { position: fixed; bottom: 30px; background: var(--gold); color: #000; padding: 12px 30px; border-radius: 50px; font-weight: bold; display: none; z-index: 1000; }
+    </style>
+</head>
+<body>
+
+    <header class="brand-header">
+        <img src="https://github.com/aloozoghal-hash/alozoghal/assets/251715844/1ca07bf2-a71c-494b-980f-a89245ee7a27" alt="الو ذغال" class="main-logo">
+        <div class="flame-container">
+            <div class="flame"></div>
+            <h1>الو ذغال</h1>
+            <div class="flame"></div>
+        </div>
+    </header>
+
+    <div class="order-card">
+        <div class="form-group">
+            <label>👤 نام و نام خانوادگی شما:</label>
+            <input type="text" id="custName" placeholder="نام خود را بنویسید...">
+        </div>
+
+        <div class="form-group">
+            <label>🔢 تعداد کیسه درخواستی (۶۵,۰۰۰ تومان):</label>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="updateQty(1)">+</button>
+                <span id="qty-val" style="font-size: 24px; font-weight: 900;">۱</span>
+                <button class="qty-btn" onclick="updateQty(-1)">-</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>🏠 آدرس و توضیحات (ته کوچه، طبقه ۲ یا درب زرد):</label>
+            <textarea id="address" placeholder="نشانی دقیق و راهنمایی برای پیک..."></textarea>
+        </div>
+
+        <button class="btn btn-gps" onclick="getGPS()">📍 ثبت موقعیت مکانی من (GPS)</button>
+        <button class="btn btn-gold" onclick="showInvoice()">✅ ثبت سفارش</button>
+
+        <div id="invoice" class="invoice-card">
+            <div class="inv-head">
+                <strong>🧾 خلاصه سفارش من</strong>
+            </div>
+            <div class="inv-row"><span>نام من:</span> <span id="f-name"></span></div>
+            <div class="inv-row"><span>محصول:</span> <span>ذغال کبابی درجه یک</span></div>
+            <div class="inv-row"><span>تعداد سفارش:</span> <span id="f-qty"></span></div>
+            <div class="inv-row"><span>نشانی و توضیحات:</span> <span id="f-addr" style="text-align: left; max-width: 60%;"></span></div>
+            <div class="inv-row"><span>وضعیت لوکیشن:</span> <span id="f-gps">❌ ثبت نشده</span></div>
+            <div class="inv-total">
+                <span>مبلغ قابل پرداخت:</span>
+                <span><span id="f-total"></span> تومان</span>
+            </div>
+        </div>
+
+        <button id="wa-btn" class="btn btn-wa" onclick="sendToWA()">📱 ارسال سفارش به الو ذغال</button>
+    </div>
+
+    <div id="toast"></div>
+
+    <script>
+        const PRICE = 65000;
+        let count = 1;
+        let gpsLink = "";
+
+        function msg(text) {
+            const t = document.getElementById('toast');
+            t.innerText = text;
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 3000);
+        }
+
+        function updateQty(v) {
+            if (count + v >= 1) {
+                count += v;
+                document.getElementById('qty-val').innerText = count;
+            }
+        }
+
+        function getGPS() {
+            msg("📍 در حال یافتن موقعیت شما...");
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    gpsLink = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+                    msg("✅ لوکیشن با موفقیت ثبت شد");
+                }, () => msg("❌ خطا! GPS گوشی را چک کنید"));
+            }
+        }
+
+        function showInvoice() {
+            const name = document.getElementById('custName').value.trim();
+            if (!name) { msg("⚠️ نام خود را وارد کنید"); return; }
+            document.getElementById('f-name').innerText = name;
+            document.getElementById('f-qty').innerText = count + " کیسه";
+            document.getElementById('f-addr').innerText = document.getElementById('address').value || "ذکر نشده";
+            document.getElementById('f-total').innerText = (count * PRICE).toLocaleString();
+            document.getElementById('f-gps').innerText = gpsLink ? "✅ ثبت شده" : "❌ ثبت نشده";
+            document.getElementById('invoice').style.display = 'block';
+            document.getElementById('wa-btn').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function sendToWA() {
+            const name = document.getElementById('custName').value;
+            const addr = document.getElementById('address').value;
+            const total = (count * PRICE).toLocaleString();
+            let text = `سلام الو ذغال، خسته نباشید 🖐️\n\n👤 *نام من:* ${name}\n📦 *تعداد:* ${count} کیسه\n💰 *مبلغ:* ${total} تومان\n`;
+            if(addr) text += `🏠 *آدرس:* ${addr}\n`;
+            if(gpsLink) text += `📍 *لوکیشن من:* ${gpsLink}\n`;
+            text += `\nلطفاً هماهنگ کنید سریع به دستم برسه. ممنون!`;
+            window.open(`https://wa.me/989370214819?text=${encodeURIComponent(text)}`);
+        }
+    </script>
+</body>
+</html>
             gap: 10px;
             margin: 10px 0 30px 0;
             text-align: center;
