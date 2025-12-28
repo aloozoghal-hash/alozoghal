@@ -34,7 +34,7 @@
             animation: blinkGold 1.2s infinite; text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
         
-        /* استایل جدید برای چالش */
+        /* استایل چالش */
         .challenge-link {
             display: block;
             margin: 15px 0;
@@ -69,7 +69,8 @@
         .prev-btn { left: 10px; } .next-btn { right: 10px; }
         .mute-toggle { position: absolute; bottom: 10px; left: 10px; z-index: 10; background: var(--gold); border: none; width: 35px; height: 35px; border-radius: 50%; color: #000; cursor: pointer; }
 
-        .image-fader { position: relative; width: 100%; height: 200px; border-top: 2px solid #222; }
+        /* اصلاح نمایش تصاویر (هم‌عرض ویدیو) */
+        .image-fader { position: relative; width: 100%; aspect-ratio: 16/9; border-top: 2px solid #222; }
         .image-fader img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s; left: 0; top: 0; }
         .image-fader img.active { opacity: 1; }
 
@@ -100,6 +101,16 @@
         .invoice-card { display: none; background: #1a1a1a; border: 3px double var(--gold); border-radius: 20px; padding: 20px; margin-top: 15px; text-align: center; }
         .invoice-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dotted #444; padding-bottom: 4px; font-size: 14px; }
         
+        /* استایل فوتر فیکس شده برای موبایل */
+        .site-footer {
+            width: 100%; max-width: 420px; background: rgba(10, 10, 10, 0.95);
+            border: 1px solid rgba(226, 176, 74, 0.3); border-radius: 25px;
+            padding: 25px 15px; margin-top: 25px; text-align: center;
+        }
+        .footer-logo-small { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--gold); margin-bottom: 10px; }
+        .footer-text { font-size: 13px; color: #bbb; line-height: 1.7; text-align: justify; }
+        .footer-info-list { list-style: none; font-size: 13px; color: #ddd; margin-top: 10px; }
+
         .call-float { position: fixed; bottom: 20px; right: 20px; background: var(--gold); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 28px; z-index: 1000; }
     </style>
 </head>
@@ -109,10 +120,6 @@
         <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg" class="main-logo">
         <div class="brand-container"><span class="fire-anim">🔥</span><div class="brand-name">الو ذغال</div><span class="fire-anim">🔥</span></div>
         <div class="sub-brand">سفارش سریع ذغال</div>
-        
-        <a href="https://aloozoghal-hash.github.io/-Mir-mir-/" class="challenge-link">
-            💥چالش رو ببر  ۳ کیسه ذغال جایزه بگیر💥
-        </a>
     </div>
 
     <div class="media-container">
@@ -173,6 +180,10 @@
 
             <button class="btn btn-gps" id="gpsBtn" onclick="getLocation()">📍 ثبت لوکیشن (GPS)</button>
             <button class="btn btn-gold" onclick="generateInvoice()">✨ مشاهده فاکتور نهایی</button>
+
+            <a href="https://aloozoghal-hash.github.io/-Mir-mir-/" class="challenge-link">
+                💥چالش رو ببر  ۳ کیسه ذغال جایزه بگیر💥
+            </a>
         </div>
 
         <div id="invoice" class="invoice-card">
@@ -192,6 +203,20 @@
         <a id="waLink" href="#" class="btn btn-wa">📱 ارسال سفارش به الو ذغال  </a>
     </div>
 
+    <footer class="site-footer">
+        <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg" class="footer-logo-small">
+        <div style="color:var(--gold); font-weight:bold; margin-bottom:10px;">درباره الو ذغال</div>
+        <p class="footer-text">
+            الو ذغال از دل ایذه برای سفره‌های باصفای شما. هدف ما ساده است: رساندن مرغوب‌ترین ذغال کباب به دست شما مشتری عزیز در کمترین زمان ممکن. تا لذت کباب خوردن برایتان دوچندان شود.
+        </p>
+        <ul class="footer-info-list">
+            <li>📍 آدرس: ایذه، پارک لاله</li>
+            <li style="direction: ltr; margin-top:5px;">۰۹۲۲ ۰۷۳ ۰۶۲۸ 📞</li>
+            <li style="margin-top:5px; font-size:11px; color:#666;">🕒 پاسخگویی: ۷ صبح تا ۹ شب</li>
+        </ul>
+        <div style="font-size: 10px; color: #444; margin-top: 15px; border-top: 1px solid #222; padding-top: 10px;">© ۲۰۲۵ تمامی حقوق برای الو ذغال محفوظ است.</div>
+    </footer>
+
     <a href="tel:09220730628" class="call-float">📞</a>
 
     <script>
@@ -209,7 +234,7 @@
             { n: "بختياری", t: "بهترین کیفیت ذغال ایذه." },
             { n: "منجزی", t: "بسته‌بندی تمیز و ذغال‌های یکدست." },
             { n: "سراکی", t: "حرارتش خیلی یکنواخت بود." },
-            { n: "حاجی‌وند", t: "برای رستورانم گرفتم، عالی بود." },
+            { n: "حاجی‌وند", t: " عالی بود." },
             { n: "جمشیدی", t: "هیچ خاکه نداشت خیلی کم👍." },
             { n: "خسروی", t: "از پاسخگویی سریع‌تون ممنونم." },
             { n: "داودی", t: "ذغال‌ها، سریع روشن شدن." },
