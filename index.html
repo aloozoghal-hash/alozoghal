@@ -2,9 +2,8 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الو ذغال | سفارش آنلاین</title>
@@ -13,7 +12,6 @@
     <meta name="theme-color" content="#050505">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-
     <link rel="icon" href="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg">
 
     <style>
@@ -24,7 +22,7 @@
         body {
             background: var(--bg); color: #fff; min-height: 100vh; padding: 15px;
             background-image: radial-gradient(circle at 50% 0%, #3a1100 0%, #050505 80%);
-            display: flex; flex-direction: column; align-items: center; padding-bottom: 50px;
+            display: flex; flex-direction: column; align-items: center; padding-bottom: 80px;
         }
 
         #pwa-install-banner {
@@ -88,21 +86,11 @@
         .star-rating input { display: none; }
         .star-rating label { font-size: 30px; color: #333; cursor: pointer; }
         .star-rating input:checked ~ label { color: var(--gold); }
-        .comment-item { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 12px; margin-bottom: 10px; border: 1px solid rgba(226, 176, 74, 0.1); width: 100%; max-width: 420px; }
 
         .site-footer { width: 100%; max-width: 420px; background: rgba(10, 10, 10, 0.95); border: 1px solid rgba(226, 176, 74, 0.3); border-radius: 25px; padding: 25px 15px; margin-top: 25px; text-align: center; }
         .footer-logo-small { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--gold); margin-bottom: 10px; }
         .footer-text { font-size: 13px; color: #bbb; line-height: 1.7; text-align: justify; }
-        .call-float { position: fixed; bottom: 20px; right: 20px; background: var(--gold); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 28px; z-index: 1000; }
-
-        /* بخش چت جدید - کاملاً مجزا */
-        #live-chat-win { position: fixed; bottom: 100px; left: 20px; width: 280px; height: 380px; background: #0a0a0a; border: 1px solid var(--gold); border-radius: 20px; display: none; flex-direction: column; z-index: 3000; box-shadow: 0 10px 30px rgba(0,0,0,0.8); overflow: hidden; }
-        #live-chat-header { background: #1a1a1a; padding: 12px; text-align: center; font-size: 14px; font-weight: bold; border-bottom: 1px solid #333; color: var(--gold); }
-        #live-chat-msgs { flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 8px; scroll-behavior: smooth; }
-        .l-msg { background: #222; padding: 8px 12px; border-radius: 12px; font-size: 13px; line-height: 1.5; border-right: 3px solid var(--gold); }
-        .l-msg b { color: var(--gold); font-size: 11px; display: block; margin-bottom: 2px; }
-        .l-chat-input-area { display: flex; padding: 10px; gap: 5px; background: #111; border-top: 1px solid #222; }
-        #l-chat-btn-toggle { position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background: #007bff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; z-index: 3001; border: 2px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+        .call-float { position: fixed; bottom: 20px; right: 20px; background: var(--gold); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 28px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
     </style>
 </head>
 <body>
@@ -118,7 +106,7 @@
     <div class="header-section">
         <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg" class="main-logo">
         <div class="brand-container"><span class="fire-anim">🔥</span><div class="brand-name">الو ذغال</div><span class="fire-anim">🔥</span></div>
-        <div class="sub-brand">سفارش سریع ذغال</div>
+        <div class="sub-brand">سفارش سریع ذغال در ایذه</div>
     </div>
 
     <div class="media-container">
@@ -131,33 +119,28 @@
                 <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172500_130.mp4" type="video/mp4"></video>
                 <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172447_155.mp4" type="video/mp4"></video>
                 <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172436_806.mp4" type="video/mp4"></video>
-                <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172430_170.mp4" type="video/mp4"></video>
-                <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172407_619.mp4" type="video/mp4"></video>
             </div>
         </div>
         <div class="image-fader" id="imgFader">
             <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/fa9760cb699d50f589f54d7ceb504aea.jpg" class="active">
             <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/b0e3ef2df45f5efe02e183abb11f6d2c.jpg">
             <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/ace2a27b61a4197c224de5881042326d.jpg">
-            <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/2e3b9282f870ecf847697d6e3ff07a58.jpg">
-            <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/122d58031851cec0be5ae6c33c1ae4e7.jpg">
         </div>
     </div>
 
-    <div class="reviews-container"><div id="comment-content">بارگذاری نظرات...</div></div>
+    <div class="reviews-container"><div id="comment-content">در حال بارگذاری نظرات مشتریان...</div></div>
 
     <div class="order-card">
         <div id="form-area">
-            <div class="form-group"><label>👤 نام و نام خانوادگی:</label><input type="text" id="custName" placeholder="نام خود را وارد کنید..."></div>
+            <div class="form-group"><label>👤 نام و نام خانوادگی (برای سفارش):</label><input type="text" id="custName" placeholder="نام خود را وارد کنید..."></div>
             <div class="form-group"><label>🕒 زمان تحویل:</label>
                 <select id="delivTime">
                     <option value="فوری">فوری</option>
                     <option value="۱ ساعت دیگه">۱ ساعت دیگه</option>
                     <option value="۲ ساعت دیگه">۲ ساعت دیگه</option>
-                    <option value="۳ ساعت دیگه">۳ ساعت دیگه</option>
                 </select>
             </div>
-            <div class="form-group"><label>🏠 آدرس محله/کوچه:</label><textarea id="custAddr" rows="2" placeholder="آدرس برای ارسال پیک"></textarea></div>
+            <div class="form-group"><label>🏠 آدرس دقیق محله و کوچه:</label><textarea id="custAddr" rows="2" placeholder="مثلاً: لاله ۱، انتهای کوچه..."></textarea></div>
             <div class="form-group"><label>🔢 تعداد کیسه ذغال (۶۵,۰۰۰ ت):</label>
                 <div class="qty-box">
                     <button class="qty-btn" onclick="updateQty('zoghal', 1)">+</button>
@@ -172,37 +155,27 @@
                     <button class="qty-btn" onclick="updateQty('sabzi', -1)">-</button>
                 </div>
             </div>
-            <button class="btn btn-gps" id="gpsBtn" onclick="getLocation()">📍 ثبت لوکیشن (GPS)</button>
-            <button class="btn btn-gold" onclick="generateInvoice()">✨ مشاهده فاکتور نهایی</button>
+            <button class="btn btn-gps" id="gpsBtn" onclick="getLocation()">📍 ثبت لوکیشن دقیق (GPS)</button>
+            <button class="btn btn-gold" onclick="generateInvoice()">✨ مشاهده فاکتور و تایید نهایی</button>
             <a href="https://aloozoghal-hash.github.io/-Mir-mir-/" class="challenge-link">💥چالش رو ببر ۳ کیسه ذغال جایزه بگیر💥</a>
         </div>
 
         <div id="invoice" class="invoice-card">
-            <h3 style="color:var(--gold); margin-bottom:10px;">📑 سفارش نهایی</h3>
-            <div class="invoice-row"><span>سفارش من:</span> <b id="inv-name"></b></div>
+            <h3 style="color:var(--gold); margin-bottom:10px;">📑 جزئیات سفارش نهایی</h3>
+            <div class="invoice-row"><span>مشتری:</span> <b id="inv-name"></b></div>
             <div class="invoice-row"><span>ذغال:</span> <b id="inv-qty-zoghal"></b> کیسه</div>
             <div class="invoice-row" id="row-inv-sabzi"><span>سبزی:</span> <b id="inv-qty-sabzi"></b> بسته</div>
-            <div class="invoice-row"><span>زمان:</span> <b id="inv-time"></b></div>
-            <div class="invoice-row"><span>مبلغ کل:</span> <span><b id="inv-price"></b> تومان</span></div>
+            <div class="invoice-row"><span>زمان ارسال:</span> <b id="inv-time"></b></div>
+            <div class="invoice-row" style="border:none; margin-top:10px; font-size:18px; color:var(--gold);"><span>مبلغ کل:</span> <span><b id="inv-price"></b> تومان</span></div>
             <div id="finalActionArea"></div>
-            <button class="btn" style="background:#444; color:#fff;" onclick="editOrder()">اصلاح سفارش</button>
+            <button class="btn" style="background:#444; color:#fff;" onclick="editOrder()">ویرایش سفارش</button>
         </div>
     </div>
-
-    <div id="live-chat-win">
-        <div id="live-chat-header">گپ مشتریان الو ذغال</div>
-        <div id="live-chat-msgs">بارگذاری پیام‌ها...</div>
-        <div class="l-chat-input-area">
-            <input type="text" id="l-chat-input" placeholder="چیزی بنویسید..." style="margin:0; font-size:14px; padding:10px;">
-            <button onclick="sendLiveMsg()" style="background:var(--gold); border:none; padding:0 12px; border-radius:10px; color:#000; font-weight:bold;">ارسال</button>
-        </div>
-    </div>
-    <div id="l-chat-btn-toggle" onclick="toggleLiveChat()">💬</div>
 
     <div class="order-card">
-        <h3 style="text-align:center; color:var(--gold); margin-bottom:15px;">⭐ ثبت نظر</h3>
+        <h3 style="text-align:center; color:var(--gold); margin-bottom:15px;">⭐ ثبت تجربه خرید</h3>
         <input type="text" id="revName" placeholder="نام شما" style="margin-bottom:10px;">
-        <textarea id="revText" rows="2" placeholder="تجربه خرید شما..."></textarea>
+        <textarea id="revText" rows="2" placeholder="نظر خود را بنویسید..."></textarea>
         <div class="star-rating">
             <input type="radio" name="stars" id="s5" value="5" checked><label for="s5">★</label>
             <input type="radio" name="stars" id="s4" value="4"><label for="s4">★</label>
@@ -210,17 +183,15 @@
             <input type="radio" name="stars" id="s2" value="2"><label for="s2">★</label>
             <input type="radio" name="stars" id="s1" value="1"><label for="s1">★</label>
         </div>
-        <button id="subBtn" class="btn" style="border:1px solid var(--gold); color:var(--gold); background:transparent;" onclick="saveCommentToSheet()">ثبت نظر در سایت</button>
+        <button class="btn" style="border:1px solid var(--gold); color:var(--gold); background:transparent;" onclick="saveCommentToSheet()">ثبت عمومی نظر</button>
     </div>
-
-    <div id="comments-container" style="width:100%; max-width:420px;"></div>
 
     <footer class="site-footer">
         <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg" class="footer-logo-small">
-        <p class="footer-text">الو ذغال از دل ایذه برای سفره‌های باصفای شما. هدف ما رساندن مرغوب‌ترین ذغال در کمترین زمان ممکن است.</p>
+        <p class="footer-text">الو ذغال ایذه؛ ارائه دهنده بهترین ذغال بلوط و مرکبات با تحویل فوری در تمام نقاط شهر.</p>
         <ul style="list-style:none; font-size:13px; margin-top:10px; color:#bbb;">
             <li>📍 آدرس: ایذه، پارک لاله</li>
-            <li>📞 ۰۹۲۲ ۰۷۳ ۰۶۲۸</li>
+            <li>📞 مدیریت: ۰۹۲۲ ۰۷۳ ۰۶۲۸</li>
         </ul>
     </footer>
 
@@ -228,7 +199,6 @@
 
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwRHFiIudndyjHc4q4xSf1qffobqNl7HI_Fy9m8vsYQGAaGnKK919JRJP6gE7208Nl_/exec";
-        const CHAT_URL = "https://script.google.com/macros/s/AKfycbzcj4ZlW40PQSgJII7v4bM4YuRkyBAO-HluizyDuKJqQd_tA1cCvsdnLORzQqy5D08-bw/exec";
         
         let comments = [
             { n: "مرادی", t: "ذغالس عالیه دمت گرم فنگه نداشتن", s:5 },
@@ -238,26 +208,30 @@
 
         let zCount = 1, sCount = 0, locL = "";
 
+        // سیستم انتخاب تعداد
         function updateQty(type, v) {
             if(type === 'zoghal' && zCount + v >= 1) { zCount += v; document.getElementById('qty-zoghal').innerText = zCount; }
             if(type === 'sabzi' && sCount + v >= 0) { sCount += v; document.getElementById('qty-sabzi').innerText = sCount; }
         }
 
+        // لوکیشن GPS
         function getLocation() {
             if(navigator.geolocation) {
-                document.getElementById('gpsBtn').innerText="در حال ثبت...";
+                document.getElementById('gpsBtn').innerText="در حال دریافت موقعیت...";
                 navigator.geolocation.getCurrentPosition(p => {
                     locL = `https://www.google.com/maps?q=${p.coords.latitude},${p.coords.longitude}`;
-                    document.getElementById('gpsBtn').innerText="✅ لوکیشن ثبت شد";
-                });
+                    document.getElementById('gpsBtn').innerText="✅ لوکیشن با موفقیت ثبت شد";
+                    document.getElementById('gpsBtn').style.borderColor = "#25D366";
+                }, () => { alert("لطفاً دسترسی GPS را فعال کنید."); document.getElementById('gpsBtn').innerText="📍 ثبت لوکیشن (GPS)"; });
             }
         }
 
-        async function generateInvoice() {
+        // صدور فاکتور
+        function generateInvoice() {
             const name = document.getElementById('custName').value, addr = document.getElementById('custAddr').value, time = document.getElementById('delivTime').value;
-            if(!name || !addr) return alert("لطفاً نام و آدرس را وارد کنید");
-            const total = (zCount * 65000) + (sCount * 35000);
+            if(!name || !addr) return alert("لطفاً نام و آدرس را برای ارسال پیک وارد کنید.");
             
+            const total = (zCount * 65000) + (sCount * 35000);
             document.getElementById('inv-name').innerText = name;
             document.getElementById('inv-qty-zoghal').innerText = zCount;
             document.getElementById('inv-qty-sabzi').innerText = sCount;
@@ -267,10 +241,10 @@
             document.getElementById('form-area').style.display='none';
             document.getElementById('invoice').style.display='block';
 
-            const msg = `سفارش جدید:\n👤 نام: ${name}\n📦 ذغال: ${zCount}\n🥗 سبزی: ${sCount}\n🏠 آدرس: ${addr}\n💰 مبلغ: ${total.toLocaleString()}\n📍 لوکیشن: ${locL || "ثبت نشده"}`;
+            const msg = `سفارش جدید الو ذغال:\n👤 نام: ${name}\n📦 ذغال: ${zCount}\n🥗 سبزی: ${sCount}\n🕒 زمان: ${time}\n🏠 آدرس: ${addr}\n💰 مبلغ: ${total.toLocaleString()}\n📍 لوکیشن: ${locL || "ثبت نشده"}`;
 
             document.getElementById('finalActionArea').innerHTML = `
-                <button class="btn btn-gold" onclick="submitOrder('${name}','${addr}','${time}',${total})">🚀 ثبت مستقیم (ارسال به تلگرام)</button>
+                <button class="btn btn-gold" onclick="submitOrder('${name}','${addr}','${time}',${total})">🚀 ثبت سیستمی (پیشنهادی)</button>
                 <a href="https://wa.me/989220730628?text=${encodeURIComponent(msg)}" class="btn" style="background:#25D366; color:#fff;">📱 ارسال در واتس‌اپ</a>
                 <a href="sms:+989220730628?body=${encodeURIComponent(msg)}" class="btn" style="background:#f44336; color:#fff;">📩 ارسال پیامک</a>
             `;
@@ -281,95 +255,56 @@
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST', mode: 'no-cors',
-                    body: JSON.stringify({ type: "order", name, zoghal: zCount, sabzi: sCount, time, address: addr, location: locL || "ثبت نشده", total: total.toLocaleString() })
+                    body: JSON.stringify({ type: "order", name, zoghal: zCount, sabzi: sCount, time, address: addr, location: locL, total: total.toLocaleString() })
                 });
-                alert("سفارش با موفقیت ثبت و به مدیریت ارسال شد.");
+                alert("سفارش شما با موفقیت ثبت شد. به زودی با شما تماس می‌گیریم.");
                 location.reload();
-            } catch (e) { alert("خطا در ارسال."); btn.disabled = false; }
+            } catch (e) { alert("خطا در ارتباط. لطفاً از واتس‌اپ استفاده کنید."); btn.disabled = false; }
         }
 
         async function saveCommentToSheet() {
             const n = document.getElementById('revName').value, t = document.getElementById('revText').value;
             const s = document.querySelector('input[name="stars"]:checked').value;
-            if(!n || !t) return alert("فیلدها را پر کنید");
+            if(!n || !t) return alert("لطفاً نام و نظر خود را بنویسید.");
             try {
-                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ n, t, s: parseInt(s) }) });
-                alert("نظر شما ثبت شد."); location.reload();
-            } catch (e) { alert("خطا"); }
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ type: "comment", n, t, s: parseInt(s) }) });
+                alert("نظر شما پس از تایید نمایش داده خواهد شد."); location.reload();
+            } catch (e) { alert("خطا در ثبت نظر."); }
         }
 
         function editOrder() { document.getElementById('form-area').style.display='block'; document.getElementById('invoice').style.display='none'; }
 
-        // انیمیشن‌ها و اسلایدرها
+        // اینتروال‌ها و اسلایدرها
         let cIdx = 0; setInterval(() => {
             const d = document.getElementById('comment-content'); if(!d) return; d.style.opacity = 0;
-            setTimeout(() => { const c = comments[cIdx % comments.length]; d.innerHTML = `<span class="c-name">${c.n}:</span>${c.t}<br>⭐⭐⭐⭐⭐`; d.style.opacity = 1; cIdx++; }, 600);
+            setTimeout(() => { 
+                const c = comments[cIdx % comments.length]; 
+                d.innerHTML = `<span class="c-name">${c.n}:</span>${c.t}<br>⭐⭐⭐⭐⭐`; 
+                d.style.opacity = 1; cIdx++; 
+            }, 600);
         }, 5000);
 
-        let iIdx = 0; setInterval(() => { const imgs = document.querySelectorAll('#imgFader img'); if(imgs.length) { imgs[iIdx].classList.remove('active'); iIdx = (iIdx + 1) % imgs.length; imgs[iIdx].classList.add('active'); } }, 3000);
+        let iIdx = 0; setInterval(() => { 
+            const imgs = document.querySelectorAll('#imgFader img'); 
+            if(imgs.length) { imgs[iIdx].classList.remove('active'); iIdx = (iIdx + 1) % imgs.length; imgs[iIdx].classList.add('active'); } 
+        }, 4000);
 
-        const vids = document.querySelectorAll('#videoWrapper video'); let currV = 0; let isMuted = true;
-
+        const vids = document.querySelectorAll('#videoWrapper video'); let currV = 0;
         function moveVideoSlide(dir) { 
             vids[currV].pause(); 
             currV = (currV + dir + vids.length) % vids.length; 
             document.getElementById('videoWrapper').style.transform = `translateX(${currV * 100}%)`; 
-            vids[currV].muted = isMuted; // نگه داشتن وضعیت صدا در اسلاید بعدی
             vids[currV].play(); 
         }
-
         function toggleMute() { 
-            isMuted = !isMuted;
-            vids.forEach(v => v.muted = isMuted); // اعمال صدا روی همه ویدیوها
-            document.getElementById('muteIcon').innerText = isMuted ? "🔇" : "🔊"; 
+            vids.forEach(v => v.muted = !v.muted);
+            document.getElementById('muteIcon').innerText = vids[0].muted ? "🔇" : "🔊"; 
         }
 
-        // --- بخش فعال‌ساز بنر نصب ---
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('pwa-install-banner').style.display = 'block';
-        });
-
-        document.getElementById('installBtn').addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                deferredPrompt = null;
-                document.getElementById('pwa-install-banner').style.display = 'none';
-            }
-        });
-
-        // --- توابع اختصاصی چت جدید ---
-        function toggleLiveChat() {
-            const win = document.getElementById('live-chat-win');
-            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
-            if(win.style.display === 'flex') updateChat();
-        }
-
-        async function updateChat() {
-            try {
-                const r = await fetch(CHAT_URL);
-                const data = await r.json();
-                const box = document.getElementById('live-chat-msgs');
-                box.innerHTML = data.map(m => `<div class="l-msg"><b>${m.name}:</b>${m.message}</div>`).join('');
-                box.scrollTop = box.scrollHeight;
-            } catch(e) { console.log("خطا در آپدیت چت"); }
-        }
-
-        async function sendLiveMsg() {
-            const name = document.getElementById('custName').value || "ناشناس";
-            const msg = document.getElementById('l-chat-input').value;
-            if(!msg) return;
-            await fetch(CHAT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ type: "chat", name, message: msg }) });
-            document.getElementById('l-chat-input').value = "";
-            setTimeout(updateChat, 1000);
-        }
-
-        setInterval(() => { if(document.getElementById('live-chat-win').style.display === 'flex') updateChat(); }, 10000);
-
-        window.onload = () => { if(vids[0]) vids[0].play(); fetch(SCRIPT_URL).then(r => r.json()).then(d => { if(d.length) { comments = [...comments, ...d]; } }); };
+        window.onload = () => { 
+            if(vids[0]) vids[0].play(); 
+            fetch(SCRIPT_URL).then(r => r.json()).then(d => { if(d && d.length) comments = [...comments, ...d]; }).catch(()=>{});
+        };
     </script>
 </body>
 </html>
