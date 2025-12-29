@@ -280,7 +280,7 @@
 
         function editOrder() { document.getElementById('form-area').style.display='block'; document.getElementById('invoice').style.display='none'; }
 
-        // انیمیشن‌ها و اسلایدرها (همان کدهای قبلی شما)
+        // انیمیشن‌ها و اسلایدرها
         let cIdx = 0; setInterval(() => {
             const d = document.getElementById('comment-content'); if(!d) return; d.style.opacity = 0;
             setTimeout(() => { const c = comments[cIdx % comments.length]; d.innerHTML = `<span class="c-name">${c.n}:</span>${c.t}<br>⭐⭐⭐⭐⭐`; d.style.opacity = 1; cIdx++; }, 600);
@@ -291,6 +291,23 @@
         const vids = document.querySelectorAll('#videoWrapper video'); let currV = 0;
         function moveVideoSlide(dir) { vids[currV].pause(); currV = (currV + dir + vids.length) % vids.length; document.getElementById('videoWrapper').style.transform = `translateX(${currV * 100}%)`; vids[currV].play(); }
         function toggleMute() { vids[currV].muted = !vids[currV].muted; document.getElementById('muteIcon').innerText = vids[currV].muted ? "🔇" : "🔊"; }
+
+        // --- بخش فعال‌ساز بنر نصب (بدون تغییر در بقیه کدها) ---
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('pwa-install-banner').style.display = 'block';
+        });
+
+        document.getElementById('installBtn').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                document.getElementById('pwa-install-banner').style.display = 'none';
+            }
+        });
 
         window.onload = () => { if(vids[0]) vids[0].play(); fetch(SCRIPT_URL).then(r => r.json()).then(d => { if(d.length) { comments = [...comments, ...d]; } }); };
     </script>
