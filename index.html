@@ -89,7 +89,7 @@
         #comment-content { transition: opacity 0.6s; font-size: 14px; line-height: 1.6; }
         .c-name { color: var(--gold); font-weight: bold; display: block; margin-bottom: 4px; }
 
-        .order-card { width: 100%; max-width: 420px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; }
+        .order-card { width: 100%; max-width: 420px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; text-align: right; }
         label { display: block; margin-bottom: 6px; color: #bbb; font-size: 13px; }
         input, textarea, select { width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid #333; border-radius: 12px; color: #fff; text-align: right; font-size: 16px; outline: none; }
@@ -104,6 +104,12 @@
         .btn-action { display: flex; gap: 10px; }
         .btn-edit { background: #444; color: #fff; }
         .btn-reset { background: #8b0000; color: #fff; }
+
+        /* استایل ستاره‌ها */
+        .star-rating { display: flex; flex-direction: row-reverse; justify-content: center; gap: 5px; margin: 10px 0; }
+        .star-rating input { display: none; }
+        .star-rating label { font-size: 30px; color: #333; cursor: pointer; }
+        .star-rating input:checked ~ label { color: var(--gold); }
 
         .invoice-card { display: none; background: #1a1a1a; border: 3px double var(--gold); border-radius: 20px; padding: 20px; margin-top: 15px; text-align: center; }
         .invoice-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dotted #444; padding-bottom: 4px; font-size: 14px; }
@@ -217,6 +223,20 @@
         <a id="waLink" href="#" class="btn btn-wa">📱 ارسال سفارش به الو ذغال  </a>
     </div>
 
+    <div class="order-card" style="margin-top: 20px;">
+        <h3 style="text-align:center; color:var(--gold); margin-bottom:15px;">⭐ ثبت نظر و امتیاز</h3>
+        <div class="form-group"><input type="text" id="revName" placeholder="نام شما"></div>
+        <div class="form-group"><textarea id="revText" rows="2" placeholder="تجربه خرید شما..."></textarea></div>
+        <div class="star-rating">
+            <input type="radio" name="stars" id="s5" value="5" checked><label for="s5">★</label>
+            <input type="radio" name="stars" id="s4" value="4"><label for="s4">★</label>
+            <input type="radio" name="stars" id="s3" value="3"><label for="s3">★</label>
+            <input type="radio" name="stars" id="s2" value="2"><label for="s2">★</label>
+            <input type="radio" name="stars" id="s1" value="1"><label for="s1">★</label>
+        </div>
+        <button id="subBtn" class="btn" style="border:1px solid var(--gold); color:var(--gold); background:transparent;" onclick="saveCommentToSheet()">ثبت نظر در سایت</button>
+    </div>
+
     <footer class="site-footer">
         <img src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/8f6dcedf3dc3dbaa82c0df548bd962c9.jpg" class="footer-logo-small">
         <div style="color:var(--gold); font-weight:bold; margin-bottom:10px;">درباره الو ذغال</div>
@@ -234,35 +254,68 @@
     <a href="tel:09220730628" class="call-float">📞</a>
 
     <script>
-        // کدهای اسکریپت اصلی شما
-        const comments = [
-            { n: "مرادی", t: "ذغالس عالیه دمت گرم فنگه نداشتن    ،." },
-            { n: "محمودی", t: "دمتون گرم، ذغال‌ها درشت و بدون خاکه بود." },
-            { n: "اسماعیل‌وندی", t: "توی ایذه هیچ‌جا اینجوری سریع ذغال کباب نمیرسونه." },
-            { n: "شیخ‌زاده", t: "ماندگاری حرارتش برای جوجه کباب حرف نداشت." },
-            { n: "غریبی", t: "یه پلاستیک خریدم ۲ولا کواب کردم دمت گرم." },
-            { n: "صادقی", t: "ذغال کباب لری  ، بوی خیلی خوبی به کباب داد." },
-            { n: "کاوسی", t: "بدون فنگه بی ." },
-            { n: "نظری", t: "پیک‌تون خیلی زود رسید، دمتون گرم." },
-            { n: "کیانی", t: "ذغال کباب با این قیمت و کیفیت توی بازار پیدا نمیشه." },
-            { n: "سعیدی", t: "خیلی راحت روشن شد، نیازی به باد زدن زیاد نداشت." },
-            { n: "بختياری", t: "بهترین کیفیت ذغال ایذه." },
-            { n: "منجزی", t: "بسته‌بندی تمیز و ذغال‌های یکدست." },
-            { n: "سراکی", t: "حرارتش خیلی یکنواخت بود." },
-            { n: "حاجی‌وند", t: " عالی بود." },
-            { n: "جمشیدی", t: "هیچ خاکه نداشت خیلی کم👍." },
-            { n: "خسروی", t: "از پاسخگویی سریع‌تون ممنونم." },
-            { n: "داودی", t: "ذغال‌ها، سریع روشن شدن." },
-            { n: "رحیمی", t: "به کل فامیل معرفی‌تون کردم." },
-            { n: "اسدی", t: "ذغال کباب اصل ایذه، دمتون گرم." },
-            { n: "نوروزی", t: "ارسال‌تون خیلی سریع و عالیه." }
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwR-8_rBqUD79ru5wvOIsjWLbhqJ6BRJcWMpyF_5SZzxpHEutWiV3xdAea_zZKUG8aT/exec";
+
+        // نظرات ثابت شما
+        let comments = [
+            { n: "مرادی", t: "ذغالس عالیه دمت گرم فنگه نداشتن    ،.", s: 5 },
+            { n: "محمودی", t: "دمتون گرم، ذغال‌ها درشت و بدون خاکه بود.", s: 5 },
+            { n: "اسماعیل‌وندی", t: "توی ایذه هیچ‌جا اینجوری سریع ذغال کباب نمیرسونه.", s: 5 },
+            { n: "شیخ‌زاده", t: "ماندگاری حرارتش برای جوجه کباب حرف نداشت.", s: 5 },
+            { n: "غریبی", t: "یه پلاستیک خریدم ۲ولا کواب کردم دمت گرم.", s: 5 },
+            { n: "صادقی", t: "ذغال کباب لری  ، بوی خیلی خوبی به کباب داد.", s: 5 },
+            { n: "کاوسی", t: "بدون فنگه بی .", s: 5 },
+            { n: "نظری", t: "پیک‌تون خیلی زود رسید، دمتون گرم.", s: 5 },
+            { n: "کیانی", t: "ذغال کباب با این قیمت و کیفیت توی بازار پیدا نمیشه.", s: 5 },
+            { n: "سعیدی", t: "خیلی راحت روشن شد، نیازی به باد زدن زیاد نداشت.", s: 5 },
+            { n: "بختياری", t: "بهترین کیفیت ذغال ایذه.", s: 5 },
+            { n: "منجزی", t: "بسته‌بندی تمیز و ذغال‌های یکدست.", s: 5 },
+            { n: "سراکی", t: "حرارتش خیلی یکنواخت بود.", s: 5 },
+            { n: "حاجی‌وند", t: " عالی بود.", s: 5 },
+            { n: "جمشیدی", t: "هیچ خاکه نداشت خیلی کم👍.", s: 5 },
+            { n: "خسروی", t: "از پاسخگویی سریع‌تون ممنونم.", s: 5 },
+            { n: "داودی", t: "ذغال‌ها، سریع روشن شدن.", s: 5 },
+            { n: "رحیمی", t: "به کل فامیل معرفی‌تون کردم.", s: 5 },
+            { n: "اسدی", t: "ذغال کباب اصل ایذه، دمتون گرم.", s: 5 },
+            { n: "نوروزی", t: "ارسال‌تون خیلی سریع و عالیه.", s: 5 }
         ];
 
-        let cIdx = 0; function cycleComments() {
-            const d = document.getElementById('comment-content'); d.style.opacity = 0;
-            setTimeout(() => { const c = comments[cIdx % comments.length]; d.innerHTML = `<span class="c-name">${c.n}:</span>${c.t}<br>⭐⭐⭐⭐⭐`; d.style.opacity = 1; cIdx++; }, 600);
+        // تابع دریافت نظرات جدید از گوگل شیت
+        async function fetchNewComments() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const newComments = await response.json();
+                if (newComments.length > 0) {
+                    comments = [...comments, ...newComments];
+                }
+            } catch (e) { console.log("Load failed"); }
+            startCycle();
         }
-        setInterval(cycleComments, 5000); cycleComments();
+
+        // تابع ارسال نظر به گوگل شیت
+        async function saveCommentToSheet() {
+            const n = document.getElementById('revName').value, t = document.getElementById('revText').value;
+            const s = document.querySelector('input[name="stars"]:checked').value;
+            if(!n || !t) return alert("نام و متن را پر کنید");
+            document.getElementById('subBtn').innerText = "در حال ثبت...";
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({n, t, s: parseInt(s)}) });
+                alert("نظر شما ثبت شد!"); location.reload();
+            } catch (e) { alert("خطا در اتصال"); document.getElementById('subBtn').innerText = "ثبت نظر"; }
+        }
+
+        let cIdx = 0; 
+        function startCycle() {
+            const d = document.getElementById('comment-content');
+            setInterval(() => {
+                d.style.opacity = 0;
+                setTimeout(() => {
+                    const c = comments[cIdx % comments.length];
+                    d.innerHTML = `<span class="c-name">${c.n}:</span>${c.t}<br>${"⭐".repeat(c.s || 5)}`;
+                    d.style.opacity = 1; cIdx++;
+                }, 600);
+            }, 5000);
+        }
 
         let iIdx = 0; const imgs = document.querySelectorAll('#imgFader img');
         setInterval(() => { if(imgs.length) { imgs[iIdx].classList.remove('active'); iIdx = (iIdx + 1) % imgs.length; imgs[iIdx].classList.add('active'); } }, 3000);
@@ -331,63 +384,43 @@
             const name = document.getElementById('custName').value; const addr = document.getElementById('custAddr').value;
             const time = document.getElementById('delivTime').value;
             if(!name || !addr) return alert("لطفاً نام و آدرس را وارد کنید");
-            
             const total = (zCount * 65000) + (sCount * 35000);
-            
             document.getElementById('inv-name').innerText = name;
             document.getElementById('inv-qty-zoghal').innerText = zCount;
             document.getElementById('inv-qty-sabzi').innerText = sCount;
             document.getElementById('inv-time').innerText = time;
             document.getElementById('inv-price').innerText = total.toLocaleString();
-            
             document.getElementById('row-inv-sabzi').style.display = sCount > 0 ? 'flex' : 'none';
-
             document.getElementById('form-area').style.display='none';
             document.getElementById('invoice').style.display='block';
             document.getElementById('waLink').style.display='block';
-
             let orderText = `📦 ذغال: ${zCount} کیسه\n`;
             if(sCount > 0) orderText += `🥗 سبزی: ${sCount} بسته\n`;
-
             const msg = `سلام الو ذغال  خسته نباشی🖐️\n👤 نام: ${name}\n${orderText}🕒 تحویل: ${time}\n🏠 آدرس: ${addr}\n💰 مبلغ: ${total.toLocaleString()} تومان\n📍 لوکیشن: ${locL || "ثبت نشده"}\n\n💥لطفا هماهنگ کنید ذغال به موقع بدستم برسه ممنونم💥`;
             document.getElementById('waLink').href = `https://wa.me/989220730628?text=${encodeURIComponent(msg)}`;
         }
 
-        window.onload = () => playCurrentVideo();
+        window.onload = () => {
+            playCurrentVideo();
+            fetchNewComments();
+        };
 
-        // --- اسکریپت اضافه شده برای مدیریت بنر نصب PWA ---
         let deferredPrompt;
         const installBanner = document.getElementById('pwa-install-banner');
         const installBtn = document.getElementById('installBtn');
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-
+        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            // اگر کاربر در حالت Standalone نیست (یعنی نصب نکرده) بنر را نشان بده
-            if (!window.matchMedia('(display-mode: standalone)').matches) {
-                installBanner.style.display = 'block';
-            }
+            e.preventDefault(); deferredPrompt = e;
+            if (!window.matchMedia('(display-mode: standalone)').matches) { installBanner.style.display = 'block'; }
         });
-
         installBtn.addEventListener('click', async () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installBanner.style.display = 'none';
-                }
+                if (outcome === 'accepted') { installBanner.style.display = 'none'; }
                 deferredPrompt = null;
             }
         });
-
-        // مخفی کردن بنر اگر اپلیکیشن قبلاً نصب و باز شده باشد
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            installBanner.style.display = 'none';
-        }
     </script>
 </body>
-    </html>
+</html>
