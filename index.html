@@ -23,7 +23,7 @@
             display: flex; flex-direction: column; align-items: center; padding-bottom: 50px;
         }
 
-        /* استایل بنر هوشمند نصب (اضافه شده) */
+        /* استایل بنر هوشمند نصب */
         #pwa-install-banner {
             display: none; position: fixed; bottom: 90px; left: 15px; right: 15px;
             background: rgba(20, 20, 20, 0.95); border: 1px solid var(--gold);
@@ -62,11 +62,6 @@
             50% { opacity: 0.7; transform: scale(0.98); box-shadow: 0 0 15px var(--fire); }
         }
 
-        @keyframes blinkGold {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.97); }
-        }
-
         .media-container { width: 100%; max-width: 420px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(226, 176, 74, 0.4); margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: #000; }
         
         .video-slider { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; }
@@ -89,7 +84,7 @@
         #comment-content { transition: opacity 0.6s; font-size: 14px; line-height: 1.6; }
         .c-name { color: var(--gold); font-weight: bold; display: block; margin-bottom: 4px; }
 
-        .order-card { width: 100%; max-width: 420px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; }
+        .order-card { width: 100%; max-width: 420px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; text-align: right; }
         label { display: block; margin-bottom: 6px; color: #bbb; font-size: 13px; }
         input, textarea, select { width: 100%; padding: 14px; background: rgba(0,0,0,0.5); border: 1px solid #333; border-radius: 12px; color: #fff; text-align: right; font-size: 16px; outline: none; }
@@ -97,7 +92,7 @@
         .qty-box { display: flex; align-items: center; justify-content: space-between; background: #000; border-radius: 12px; padding: 5px; border: 1px solid #333; direction: ltr; margin-bottom: 10px; }
         .qty-btn { width: 45px; height: 45px; border-radius: 10px; border: none; background: #1a1a1a; color: var(--gold); font-size: 24px; cursor: pointer; }
 
-        .btn { width: 100%; padding: 16px; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; transition: 0.3s; }
         .btn-gold { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; }
         .btn-gps { background: transparent; color: #fff; border: 1px solid #555; font-size: 13px; }
         .btn-wa { background: #25D366; color: #fff; display: none; text-decoration: none; text-align: center; }
@@ -108,6 +103,12 @@
         .invoice-card { display: none; background: #1a1a1a; border: 3px double var(--gold); border-radius: 20px; padding: 20px; margin-top: 15px; text-align: center; }
         .invoice-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dotted #444; padding-bottom: 4px; font-size: 14px; }
         
+        /* استایل اختصاصی بخش ثبت نظر هوشمند */
+        .star-rating { display: flex; flex-direction: row-reverse; justify-content: center; gap: 5px; margin-bottom: 10px; }
+        .star-rating input { display: none; }
+        .star-rating label { font-size: 28px; color: #333; cursor: pointer; }
+        .star-rating input:checked ~ label { color: var(--gold); }
+
         .site-footer {
             width: 100%; max-width: 420px; background: rgba(10, 10, 10, 0.95);
             border: 1px solid rgba(226, 176, 74, 0.3); border-radius: 25px;
@@ -207,7 +208,6 @@
             <div class="invoice-row" id="row-inv-sabzi"><span>سبزی:</span> <b id="inv-qty-sabzi"></b> بسته</div>
             <div class="invoice-row"><span>زمان:</span> <b id="inv-time"></b></div>
             <div class="invoice-row"><span>مبلغ کل:</span> <span><b id="inv-price"></b> تومان</span></div>
-            <p style="font-size: 13px; color: #ffd700; margin-top: 10px; line-height: 1.5;"></p>
             
             <div class="btn-action">
                 <button class="btn btn-edit" onclick="editOrder()">اصلاح</button>
@@ -215,6 +215,20 @@
             </div>
         </div>
         <a id="waLink" href="#" class="btn btn-wa">📱 ارسال سفارش به الو ذغال  </a>
+    </div>
+
+    <div class="order-card" style="margin-top: 0;">
+        <h3 style="color:var(--gold); text-align:center; margin-bottom:15px; font-size: 18px;">⭐ ثبت تجربه خرید</h3>
+        <div class="form-group"><input type="text" id="revName" placeholder="نام شما (نمایش در سایت)"></div>
+        <div class="form-group"><textarea id="revText" rows="2" placeholder="نظر خود را بنویسید..."></textarea></div>
+        <div class="star-rating">
+            <input type="radio" name="stars" id="s5" value="5"><label for="s5">★</label>
+            <input type="radio" name="stars" id="s4" value="4"><label for="s4">★</label>
+            <input type="radio" name="stars" id="s3" value="3"><label for="s3">★</label>
+            <input type="radio" name="stars" id="s2" value="2"><label for="s2">★</label>
+            <input type="radio" name="stars" id="s1" value="1"><label for="s1">★</label>
+        </div>
+        <button id="submitRev" class="btn" style="background: rgba(226, 176, 74, 0.1); color: var(--gold); border: 1px solid var(--gold);" onclick="saveCommentToDB()">ثبت نظر در لیست مشتریان</button>
     </div>
 
     <footer class="site-footer">
@@ -234,36 +248,61 @@
     <a href="tel:09220730628" class="call-float">📞</a>
 
     <script>
-        // کدهای اسکریپت اصلی شما
-        const comments = [
-            { n: "مرادی", t: "ذغالس عالیه دمت گرم فنگه نداشتن    ،." },
-            { n: "محمودی", t: "دمتون گرم، ذغال‌ها درشت و بدون خاکه بود." },
-            { n: "اسماعیل‌وندی", t: "توی ایذه هیچ‌جا اینجوری سریع ذغال کباب نمیرسونه." },
-            { n: "شیخ‌زاده", t: "ماندگاری حرارتش برای جوجه کباب حرف نداشت." },
-            { n: "غریبی", t: "یه پلاستیک خریدم ۲ولا کواب کردم دمت گرم." },
-            { n: "صادقی", t: "ذغال کباب لری  ، بوی خیلی خوبی به کباب داد." },
-            { n: "کاوسی", t: "بدون فنگه بی ." },
-            { n: "نظری", t: "پیک‌تون خیلی زود رسید، دمتون گرم." },
-            { n: "کیانی", t: "ذغال کباب با این قیمت و کیفیت توی بازار پیدا نمیشه." },
-            { n: "سعیدی", t: "خیلی راحت روشن شد، نیازی به باد زدن زیاد نداشت." },
-            { n: "بختياری", t: "بهترین کیفیت ذغال ایذه." },
-            { n: "منجزی", t: "بسته‌بندی تمیز و ذغال‌های یکدست." },
-            { n: "سراکی", t: "حرارتش خیلی یکنواخت بود." },
-            { n: "حاجی‌وند", t: " عالی بود." },
-            { n: "جمشیدی", t: "هیچ خاکه نداشت خیلی کم👍." },
-            { n: "خسروی", t: "از پاسخگویی سریع‌تون ممنونم." },
-            { n: "داودی", t: "ذغال‌ها، سریع روشن شدن." },
-            { n: "رحیمی", t: "به کل فامیل معرفی‌تون کردم." },
-            { n: "اسدی", t: "ذغال کباب اصل ایذه، دمتون گرم." },
-            { n: "نوروزی", t: "ارسال‌تون خیلی سریع و عالیه." }
-        ];
+        // --- تنظیمات دیتابیس نظرات ---
+        const BIN_ID = "677100b4e41b4d34e46da89b";
+        const MASTER_KEY = "$2a$10$W/3KgO/SCunwj6PuHdqDEeYLHhG0/CreAcbBOwEVyAMimTpaR2Bqu";
+        let dbComments = [];
 
-        let cIdx = 0; function cycleComments() {
-            const d = document.getElementById('comment-content'); d.style.opacity = 0;
-            setTimeout(() => { const c = comments[cIdx % comments.length]; d.innerHTML = `<span class="c-name">${c.n}:</span>${c.t}<br>⭐⭐⭐⭐⭐`; d.style.opacity = 1; cIdx++; }, 600);
+        // بارگذاری نظرات از دیتابیس
+        async function loadCommentsFromDB() {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { "X-Master-Key": MASTER_KEY }
+                });
+                const data = await res.json();
+                dbComments = data.record;
+                startCycle();
+            } catch (e) { console.log("Error loading comments"); }
         }
-        setInterval(cycleComments, 5000); cycleComments();
 
+        let cIdx = 0;
+        function startCycle() {
+            const d = document.getElementById('comment-content');
+            const cycle = () => {
+                d.style.opacity = 0;
+                setTimeout(() => {
+                    const c = dbComments[cIdx % dbComments.length];
+                    d.innerHTML = `<span class="c-name">${c.n}:</span>${c.t}<br>${"⭐".repeat(c.s || 5)}`;
+                    d.style.opacity = 1; cIdx++;
+                }, 600);
+            };
+            cycle(); setInterval(cycle, 5000);
+        }
+
+        // ذخیره خودکار نظر جدید
+        async function saveCommentToDB() {
+            const name = document.getElementById('revName').value;
+            const text = document.getElementById('revText').value;
+            const stars = document.querySelector('input[name="stars"]:checked')?.value || 5;
+            const btn = document.getElementById('submitRev');
+
+            if(!name || !text) return alert("لطفا نام و نظر خود را بنویسید");
+            btn.innerText = "در حال ثبت..."; btn.disabled = true;
+
+            const newList = [...dbComments, { n: name, t: text, s: parseInt(stars) }];
+
+            try {
+                await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: { "Content-Type": "application/json", "X-Master-Key": MASTER_KEY },
+                    body: JSON.stringify(newList)
+                });
+                alert("سپاس! نظر شما با موفقیت ثبت و در لیست قرار گرفت.");
+                location.reload();
+            } catch (e) { alert("خطا در ثبت"); btn.disabled = false; btn.innerText = "تلاش مجدد"; }
+        }
+
+        // کدهای اسلایدر و تصاویر
         let iIdx = 0; const imgs = document.querySelectorAll('#imgFader img');
         setInterval(() => { if(imgs.length) { imgs[iIdx].classList.remove('active'); iIdx = (iIdx + 1) % imgs.length; imgs[iIdx].classList.add('active'); } }, 3000);
 
@@ -280,9 +319,10 @@
         }
 
         function playCurrentVideo() {
-            const activeVid = vids[currentVidIdx];
-            activeVid.muted = isMuted;
-            activeVid.play().catch(e => console.log("Auto-play blocked"));
+            if(vids[currentVidIdx]) {
+                vids[currentVidIdx].muted = isMuted;
+                vids[currentVidIdx].play().catch(e => {});
+            }
         }
 
         function toggleMute() {
@@ -333,15 +373,12 @@
             if(!name || !addr) return alert("لطفاً نام و آدرس را وارد کنید");
             
             const total = (zCount * 65000) + (sCount * 35000);
-            
             document.getElementById('inv-name').innerText = name;
             document.getElementById('inv-qty-zoghal').innerText = zCount;
             document.getElementById('inv-qty-sabzi').innerText = sCount;
             document.getElementById('inv-time').innerText = time;
             document.getElementById('inv-price').innerText = total.toLocaleString();
-            
             document.getElementById('row-inv-sabzi').style.display = sCount > 0 ? 'flex' : 'none';
-
             document.getElementById('form-area').style.display='none';
             document.getElementById('invoice').style.display='block';
             document.getElementById('waLink').style.display='block';
@@ -349,25 +386,22 @@
             let orderText = `📦 ذغال: ${zCount} کیسه\n`;
             if(sCount > 0) orderText += `🥗 سبزی: ${sCount} بسته\n`;
 
-            const msg = `سلام الو ذغال  خسته نباشی🖐️\n👤 نام: ${name}\n${orderText}🕒 تحویل: ${time}\n🏠 آدرس: ${addr}\n💰 مبلغ: ${total.toLocaleString()} تومان\n📍 لوکیشن: ${locL || "ثبت نشده"}\n\n💥لطفا هماهنگ کنید ذغال به موقع بدستم برسه ممنونم💥`;
+            const msg = `سلام الو ذغال خسته نباشی🖐️\n👤 نام: ${name}\n${orderText}🕒 تحویل: ${time}\n🏠 آدرس: ${addr}\n💰 مبلغ: ${total.toLocaleString()} تومان\n📍 لوکیشن: ${locL || "ثبت نشده"}\n\n💥لطفا هماهنگ کنید ذغال به موقع بدستم برسه ممنونم💥`;
             document.getElementById('waLink').href = `https://wa.me/989220730628?text=${encodeURIComponent(msg)}`;
         }
 
-        window.onload = () => playCurrentVideo();
+        window.onload = () => {
+            playCurrentVideo();
+            loadCommentsFromDB();
+        };
 
-        // --- اسکریپت اضافه شده برای مدیریت بنر نصب PWA ---
+        // مدیریت PWA
         let deferredPrompt;
         const installBanner = document.getElementById('pwa-install-banner');
         const installBtn = document.getElementById('installBtn');
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            // اگر کاربر در حالت Standalone نیست (یعنی نصب نکرده) بنر را نشان بده
+            e.preventDefault(); deferredPrompt = e;
             if (!window.matchMedia('(display-mode: standalone)').matches) {
                 installBanner.style.display = 'block';
             }
@@ -377,17 +411,10 @@
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installBanner.style.display = 'none';
-                }
+                if (outcome === 'accepted') installBanner.style.display = 'none';
                 deferredPrompt = null;
             }
         });
-
-        // مخفی کردن بنر اگر اپلیکیشن قبلاً نصب و باز شده باشد
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            installBanner.style.display = 'none';
-        }
     </script>
 </body>
-                </html>
+</html>
