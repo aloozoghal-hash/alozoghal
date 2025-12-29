@@ -118,12 +118,12 @@
             <button class="nav-btn prev-btn" onclick="moveVideoSlide(-1)">❮</button>
             <button class="nav-btn next-btn" onclick="moveVideoSlide(1)">❯</button>
             <div class="video-wrapper" id="videoWrapper">
-                <video muted playsinline loop><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/a8c2f66bea9ea321326456dd5d058f26_720w.mp4" type="video/mp4"></video>
-                <video muted playsinline loop><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172500_130.mp4" type="video/mp4"></video>
-                <video muted playsinline loop><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172447_155.mp4" type="video/mp4"></video>
-                <video muted playsinline loop><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172436_806.mp4" type="video/mp4"></video>
-                <video muted playsinline loop><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172430_170.mp4" type="video/mp4"></video>
-                <video muted playsinline loop><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172407_619.mp4" type="video/mp4"></video>
+                <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/a8c2f66bea9ea321326456dd5d058f26_720w.mp4" type="video/mp4"></video>
+                <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172500_130.mp4" type="video/mp4"></video>
+                <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172447_155.mp4" type="video/mp4"></video>
+                <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172436_806.mp4" type="video/mp4"></video>
+                <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172430_170.mp4" type="video/mp4"></video>
+                <video playsinline loop muted><source src="https://raw.githubusercontent.com/aloozoghal-hash/alozoghal/main/VID_20251227_172407_619.mp4" type="video/mp4"></video>
             </div>
         </div>
         <div class="image-fader" id="imgFader">
@@ -288,11 +288,23 @@
 
         let iIdx = 0; setInterval(() => { const imgs = document.querySelectorAll('#imgFader img'); if(imgs.length) { imgs[iIdx].classList.remove('active'); iIdx = (iIdx + 1) % imgs.length; imgs[iIdx].classList.add('active'); } }, 3000);
 
-        const vids = document.querySelectorAll('#videoWrapper video'); let currV = 0;
-        function moveVideoSlide(dir) { vids[currV].pause(); currV = (currV + dir + vids.length) % vids.length; document.getElementById('videoWrapper').style.transform = `translateX(${currV * 100}%)`; vids[currV].play(); }
-        function toggleMute() { vids[currV].muted = !vids[currV].muted; document.getElementById('muteIcon').innerText = vids[currV].muted ? "🔇" : "🔊"; }
+        const vids = document.querySelectorAll('#videoWrapper video'); let currV = 0; let isMuted = true;
 
-        // --- بخش فعال‌ساز بنر نصب (بدون تغییر در بقیه کدها) ---
+        function moveVideoSlide(dir) { 
+            vids[currV].pause(); 
+            currV = (currV + dir + vids.length) % vids.length; 
+            document.getElementById('videoWrapper').style.transform = `translateX(${currV * 100}%)`; 
+            vids[currV].muted = isMuted; // نگه داشتن وضعیت صدا در اسلاید بعدی
+            vids[currV].play(); 
+        }
+
+        function toggleMute() { 
+            isMuted = !isMuted;
+            vids.forEach(v => v.muted = isMuted); // اعمال صدا روی همه ویدیوها
+            document.getElementById('muteIcon').innerText = isMuted ? "🔇" : "🔊"; 
+        }
+
+        // --- بخش فعال‌ساز بنر نصب ---
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
