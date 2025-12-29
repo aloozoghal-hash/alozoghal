@@ -23,7 +23,6 @@
             display: flex; flex-direction: column; align-items: center; padding-bottom: 50px;
         }
 
-        /* استایل بنر هوشمند نصب */
         #pwa-install-banner {
             display: none; position: fixed; bottom: 90px; left: 15px; right: 15px;
             background: rgba(20, 20, 20, 0.95); border: 1px solid var(--gold);
@@ -103,7 +102,6 @@
         .invoice-card { display: none; background: #1a1a1a; border: 3px double var(--gold); border-radius: 20px; padding: 20px; margin-top: 15px; text-align: center; }
         .invoice-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dotted #444; padding-bottom: 4px; font-size: 14px; }
         
-        /* استایل اختصاصی بخش ثبت نظر هوشمند */
         .star-rating { display: flex; flex-direction: row-reverse; justify-content: center; gap: 5px; margin-bottom: 10px; }
         .star-rating input { display: none; }
         .star-rating label { font-size: 28px; color: #333; cursor: pointer; }
@@ -248,21 +246,27 @@
     <a href="tel:09220730628" class="call-float">📞</a>
 
     <script>
-        // --- تنظیمات دیتابیس نظرات ---
-        const BIN_ID = "677100b4e41b4d34e46da89b";
+        const BIN_ID = "6952348043b1c97be90bc6da";
         const MASTER_KEY = "$2a$10$W/3KgO/SCunwj6PuHdqDEeYLHhG0/CreAcbBOwEVyAMimTpaR2Bqu";
-        let dbComments = [];
+        
+        // نظرات قدیمی به عنوان پیش‌فرض
+        let dbComments = [
+            { n: "مرادی", t: "ذغالس عالیه دمت گرم فنگه نداشتن", s: 5 },
+            { n: "محمودی", t: "دمتون گرم، ذغال‌ها درشت و بدون خاکه بود.", s: 5 },
+            { n: "اسماعیل‌وندی", t: "توی ایذه هیچ‌جا اینجوری سریع ذغال کباب نمیرسونه.", s: 5 },
+            { n: "شیخ‌زاده", t: "ماندگاری حرارتش برای جوجه کباب حرف نداشت.", s: 5 },
+            { n: "نوروزی", t: "ارسال‌تون خیلی سریع و عالیه.", s: 5 }
+        ];
 
-        // بارگذاری نظرات از دیتابیس
         async function loadCommentsFromDB() {
             try {
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
                     headers: { "X-Master-Key": MASTER_KEY }
                 });
                 const data = await res.json();
-                dbComments = data.record;
+                if(data.record && data.record.length > 0) dbComments = data.record;
                 startCycle();
-            } catch (e) { console.log("Error loading comments"); }
+            } catch (e) { startCycle(); }
         }
 
         let cIdx = 0;
@@ -279,37 +283,31 @@
             cycle(); setInterval(cycle, 5000);
         }
 
-        // ذخیره خودکار نظر جدید
         async function saveCommentToDB() {
             const name = document.getElementById('revName').value;
             const text = document.getElementById('revText').value;
             const stars = document.querySelector('input[name="stars"]:checked')?.value || 5;
             const btn = document.getElementById('submitRev');
-
             if(!name || !text) return alert("لطفا نام و نظر خود را بنویسید");
             btn.innerText = "در حال ثبت..."; btn.disabled = true;
-
             const newList = [...dbComments, { n: name, t: text, s: parseInt(stars) }];
-
             try {
                 await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
                     method: 'PUT',
                     headers: { "Content-Type": "application/json", "X-Master-Key": MASTER_KEY },
                     body: JSON.stringify(newList)
                 });
-                alert("سپاس! نظر شما با موفقیت ثبت و در لیست قرار گرفت.");
+                alert("سپاس! نظر شما ثبت شد.");
                 location.reload();
             } catch (e) { alert("خطا در ثبت"); btn.disabled = false; btn.innerText = "تلاش مجدد"; }
         }
 
-        // کدهای اسلایدر و تصاویر
         let iIdx = 0; const imgs = document.querySelectorAll('#imgFader img');
         setInterval(() => { if(imgs.length) { imgs[iIdx].classList.remove('active'); iIdx = (iIdx + 1) % imgs.length; imgs[iIdx].classList.add('active'); } }, 3000);
 
         const videoWrapper = document.getElementById('videoWrapper');
         const vids = document.querySelectorAll('#videoWrapper video');
-        let currentVidIdx = 0;
-        let isMuted = true;
+        let currentVidIdx = 0; let isMuted = true;
 
         function moveVideoSlide(direction) {
             vids[currentVidIdx].pause();
@@ -317,30 +315,16 @@
             videoWrapper.style.transform = `translateX(${currentVidIdx * 100}%)`;
             playCurrentVideo();
         }
-
         function playCurrentVideo() {
-            if(vids[currentVidIdx]) {
-                vids[currentVidIdx].muted = isMuted;
-                vids[currentVidIdx].play().catch(e => {});
-            }
+            if(vids[currentVidIdx]) { vids[currentVidIdx].muted = isMuted; vids[currentVidIdx].play().catch(e => {}); }
         }
-
-        function toggleMute() {
-            isMuted = !isMuted;
-            vids[currentVidIdx].muted = isMuted;
-            document.getElementById('muteIcon').innerText = isMuted ? "🔇" : "🔊";
-        }
+        function toggleMute() { isMuted = !isMuted; vids[currentVidIdx].muted = isMuted; document.getElementById('muteIcon').innerText = isMuted ? "🔇" : "🔊"; }
 
         let zCount = 1; let sCount = 0; let locL = "";
-        
         function updateQty(type, v) {
-            if(type === 'zoghal') {
-                if(zCount + v >= 1) { zCount += v; document.getElementById('qty-zoghal').innerText = zCount; }
-            } else {
-                if(sCount + v >= 0) { sCount += v; document.getElementById('qty-sabzi').innerText = sCount; }
-            }
+            if(type === 'zoghal') { if(zCount + v >= 1) { zCount += v; document.getElementById('qty-zoghal').innerText = zCount; } }
+            else { if(sCount + v >= 0) { sCount += v; document.getElementById('qty-sabzi').innerText = sCount; } }
         }
-
         function getLocation() {
             if(navigator.geolocation) {
                 document.getElementById('gpsBtn').innerText="در حال ثبت...";
@@ -350,28 +334,17 @@
                 });
             }
         }
-
-        function editOrder() {
-            document.getElementById('form-area').style.display='block';
-            document.getElementById('invoice').style.display='none';
-            document.getElementById('waLink').style.display='none';
-        }
-
+        function editOrder() { document.getElementById('form-area').style.display='block'; document.getElementById('invoice').style.display='none'; document.getElementById('waLink').style.display='none'; }
         function resetForm() {
             zCount = 1; sCount = 0; locL = "";
-            document.getElementById('qty-zoghal').innerText = 1;
-            document.getElementById('qty-sabzi').innerText = 0;
-            document.getElementById('custName').value = "";
-            document.getElementById('custAddr').value = "";
-            document.getElementById('gpsBtn').innerText = "📍 ثبت لوکیشن (GPS)";
-            editOrder();
+            document.getElementById('qty-zoghal').innerText = 1; document.getElementById('qty-sabzi').innerText = 0;
+            document.getElementById('custName').value = ""; document.getElementById('custAddr').value = "";
+            document.getElementById('gpsBtn').innerText = "📍 ثبت لوکیشن (GPS)"; editOrder();
         }
-
         function generateInvoice() {
             const name = document.getElementById('custName').value; const addr = document.getElementById('custAddr').value;
             const time = document.getElementById('delivTime').value;
             if(!name || !addr) return alert("لطفاً نام و آدرس را وارد کنید");
-            
             const total = (zCount * 65000) + (sCount * 35000);
             document.getElementById('inv-name').innerText = name;
             document.getElementById('inv-qty-zoghal').innerText = zCount;
@@ -382,38 +355,19 @@
             document.getElementById('form-area').style.display='none';
             document.getElementById('invoice').style.display='block';
             document.getElementById('waLink').style.display='block';
-
-            let orderText = `📦 ذغال: ${zCount} کیسه\n`;
-            if(sCount > 0) orderText += `🥗 سبزی: ${sCount} بسته\n`;
-
-            const msg = `سلام الو ذغال خسته نباشی🖐️\n👤 نام: ${name}\n${orderText}🕒 تحویل: ${time}\n🏠 آدرس: ${addr}\n💰 مبلغ: ${total.toLocaleString()} تومان\n📍 لوکیشن: ${locL || "ثبت نشده"}\n\n💥لطفا هماهنگ کنید ذغال به موقع بدستم برسه ممنونم💥`;
+            const msg = `سلام الو ذغال خسته نباشی🖐️\n👤 نام: ${name}\n📦 ذغال: ${zCount} کیسه\n🥗 سبزی: ${sCount} بسته\n🕒 تحویل: ${time}\n🏠 آدرس: ${addr}\n💰 مبلغ: ${total.toLocaleString()} تومان\n📍 لوکیشن: ${locL || "ثبت نشده"}\n\n💥لطفا هماهنگ کنید ذغال به موقع بدستم برسه ممنونم💥`;
             document.getElementById('waLink').href = `https://wa.me/989220730628?text=${encodeURIComponent(msg)}`;
         }
 
-        window.onload = () => {
-            playCurrentVideo();
-            loadCommentsFromDB();
-        };
+        window.onload = () => { playCurrentVideo(); loadCommentsFromDB(); };
 
-        // مدیریت PWA
         let deferredPrompt;
-        const installBanner = document.getElementById('pwa-install-banner');
-        const installBtn = document.getElementById('installBtn');
-
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault(); deferredPrompt = e;
-            if (!window.matchMedia('(display-mode: standalone)').matches) {
-                installBanner.style.display = 'block';
-            }
+            if (!window.matchMedia('(display-mode: standalone)').matches) document.getElementById('pwa-install-banner').style.display = 'block';
         });
-
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') installBanner.style.display = 'none';
-                deferredPrompt = null;
-            }
+        document.getElementById('installBtn').addEventListener('click', async () => {
+            if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; }
         });
     </script>
 </body>
