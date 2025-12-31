@@ -14,7 +14,7 @@
 
     <style>
         @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
-        :root { --fire: #ff4d00; --gold: #e2b04a; --bg: #050505; --royal: #ffd700; --tg: #0088cc; --sms: #ff5722; }
+        :root { --fire: #ff4d00; --gold: #e2b04a; --bg: #050505; --royal: #ffd700; --tg: #0088cc; --sms: #ff5722; --green-wallet: #2ecc71; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Vazirmatn', sans-serif; }
 
         body {
@@ -124,12 +124,12 @@
         .review-item { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 15px; margin-bottom: 10px; border-right: 4px solid var(--gold); text-align: right; }
         .star-display { color: var(--gold); font-size: 12px; margin-left: 5px; letter-spacing: 2px; }
 
-        .loyalty-info { font-size: 11px; color: var(--gold); margin-top: 4px; display: block; }
+        .loyalty-info { font-size: 12px; color: var(--green-wallet); margin-top: 4px; display: block; font-weight: bold; }
 
         /* استایل قلک جدید */
-        .wallet-container { background: #111; border: 1px solid #333; border-radius: 15px; padding: 10px; margin-bottom: 15px; }
-        .wallet-bar-bg { background: #222; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 5px; }
-        .wallet-bar-fill { background: var(--gold); height: 100%; width: 0%; transition: 1s; box-shadow: 0 0 10px var(--gold); }
+        .wallet-container { background: rgba(46, 204, 113, 0.1); border: 1px solid var(--green-wallet); border-radius: 15px; padding: 12px; margin-bottom: 15px; box-shadow: 0 0 10px rgba(46, 204, 113, 0.2); }
+        .wallet-bar-bg { background: rgba(255,255,255,0.1); height: 12px; border-radius: 6px; overflow: hidden; margin-top: 8px; border: 1px solid rgba(46, 204, 113, 0.3); }
+        .wallet-bar-fill { background: linear-gradient(90deg, #2ecc71, #27ae60); height: 100%; width: 0%; transition: 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 0 15px var(--green-wallet); }
 
         /* استایل پنل مدیریت */
         #admin-panel { display: none; width: 100%; max-width: 420px; background: #200; border: 2px solid #f00; border-radius: 20px; padding: 15px; margin-top: 15px; }
@@ -227,7 +227,7 @@
                 </div>
             </div>
 
-            <div class="form-group"><label>🥗 تعداد بسته سبزی (۳۵,۰۰۰ ت):</label>
+            <div class="form-group"><label>🥬🥦 تعداد بسته سبزی (۳۵,۰۰۰ ت):</label>
                 <div class="qty-box">
                     <button class="qty-btn" onclick="updateQty('sabzi', 1)">+</button>
                     <span id="qty-sabzi" style="font-size: 22px; font-weight: bold;">۰</span>
@@ -293,6 +293,31 @@
     <a href="tel:09220730628" class="call-float">📞</a>
 
     <script>
+        // --- کد مدیریت نصب اپلیکیشن PWA ---
+        let deferredPrompt;
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // نمایش بنر فقط وقتی مرورگر آماده نصب است
+            setTimeout(() => {
+                document.getElementById('pwa-install-banner').style.display = 'block';
+            }, 3000); // ۳ ثانیه تاخیر برای مزاحمت کمتر
+        });
+
+        document.getElementById('installBtn').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                document.getElementById('pwa-install-banner').style.display = 'none';
+            }
+        });
+        // --------------------------------
+
         const GOOGLE_BRIDGE_URL = "https://script.google.com/macros/s/AKfycbyLQjEqmjs5Re2m7nf3lGU_IZQU0ILuFgiJWxrEQ306AgUy1zW090quuwv1QLWVOQyV/exec";
         const SHEET_API = "https://sheetdb.io/api/v1/4yb79n3j2hbvi";
         const OWNER_PHONE = "09220730628";
@@ -402,12 +427,14 @@
 
                     if(userPrevTotalCarts > 0) {
                         if(currentCycle === 0 && userPrevTotalCarts >= 10) {
-                            statusLabel.innerHTML = `✨ تبریک! خرید دهم شماست. **نیم‌بها** حساب می‌شود!`;
+                            statusLabel.innerHTML = `✨ تبریک! خرید دهم شماست. **💰نصف قیمت💰** حساب می‌شود!`;
                         } else {
-                            statusLabel.innerText = `سابقه: ${userPrevTotalCarts} کیسه | ${10 - currentCycle} کیسه تا هدیه بعدی.`;
+                            // نمایش ذخیره با کیسه پول و تومان
+                            const savedAmount = (userPrevTotalCarts * 3250).toLocaleString();
+                            statusLabel.innerHTML = `💰 ذخیره قلک  شما: ${savedAmount} تومان | ${10 - currentCycle} کیسه تا هدیه .`;
                         }
                     } else {
-                        statusLabel.innerText = "🌟 اولین خرید شماست؟ خوش آمدید!";
+                        statusLabel.innerText = "🌟 این اولین خرید شماست؟ خوش آمدید!";
                     }
                 } catch(e) { statusLabel.innerText = ""; }
             } else {
@@ -496,7 +523,7 @@
                     },
                     err => {
                         document.getElementById('gpsBtn').innerText="📍 ثبت لوکیشن (GPS)";
-                        alert("⚠️ لطفا لوکیشن دستگاه را روشن کنید.");
+                        alert("⚠️ لطفا برای ثبت آدرس دقیق لوکیشن دستگاه را روشن کنید.");
                     },
                     { enableHighAccuracy: true, timeout: 10000 }
                 );
@@ -565,7 +592,7 @@
                     body: JSON.stringify({ message: window.finalMsg })
                 });
 
-                alert("✅ سفارش ثبت و سوابق شما ذخیره شد.");
+                alert("✅ سفارش ثبت و سوابق خرید شما ذخیره شد.");
                 location.reload();
             } catch (e) {
                 alert("خطا در ثبت. لطفاً از واتس‌اپ استفاده کنید.");
